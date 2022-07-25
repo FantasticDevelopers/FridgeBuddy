@@ -24,7 +24,12 @@ struct FridgeBuddyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView() {
+                LaunchView()
+            }
+            .accentColor(Color.green)
+            .environmentObject(LaunchViewModel())
+
         }
     }
 }
