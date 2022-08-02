@@ -25,6 +25,12 @@
 		072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88A52888FA6F0016BC95 /* RecipesViewModel.swift */; };
 		072B88A82888FA8A0016BC95 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88A72888FA8A0016BC95 /* MoreView.swift */; };
 		072B88AA2888FA990016BC95 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88A92888FA990016BC95 /* MoreViewModel.swift */; };
+		0787605B28982B8C00285CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787605A28982B8C00285CC1 /* AppDelegate.swift */; };
+		0787606228986A1B00285CC1 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787606128986A1B00285CC1 /* CameraView.swift */; };
+		078760642898A11400285CC1 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760632898A11400285CC1 /* CameraService.swift */; };
+		078760662898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760652898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift */; };
+		078760682898DBD200285CC1 /* AddFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760672898DBD200285CC1 /* AddFormView.swift */; };
+		0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760692898DF7800285CC1 /* AddFormViewModel.swift */; };
 		078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9C9288AEF2300BD5E7D /* LoginView.swift */; };
 		078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */; };
 		078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CD288B798200BD5E7D /* SignUpView.swift */; };
@@ -52,11 +58,16 @@
 		072B88A52888FA6F0016BC95 /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
 		072B88A72888FA8A0016BC95 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		072B88A92888FA990016BC95 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		0787605A28982B8C00285CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0787606128986A1B00285CC1 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		078760632898A11400285CC1 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		078760652898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureFoodItemPhotoView.swift; sourceTree = "<group>"; };
+		078760672898DBD200285CC1 /* AddFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormView.swift; sourceTree = "<group>"; };
+		078760692898DF7800285CC1 /* AddFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormViewModel.swift; sourceTree = "<group>"; };
 		078FF9C9288AEF2300BD5E7D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		078FF9CD288B798200BD5E7D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		07D46F05288DB67300E3FF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07F1D7B0288B9A0B00178430 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		07F1D7B2288B9C0700178430 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
@@ -97,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				07F1D7AF288B99CE00178430 /* Helpers */,
+				0787606028986A0E00285CC1 /* Camera */,
 				078FF9C8288AEF0F00BD5E7D /* Account */,
 				072B889A2888F9C80016BC95 /* More */,
 				072B88992888F9C00016BC95 /* Recipes */,
@@ -105,8 +117,8 @@
 				072B888F2888DCDC0016BC95 /* Launch */,
 				072B88942888DD1A0016BC95 /* Models */,
 				072B887A2888D7940016BC95 /* FridgeBuddyApp.swift */,
+				0787605A28982B8C00285CC1 /* AppDelegate.swift */,
 				072B88882888DA450016BC95 /* GoogleService-Info.plist */,
-				07D46F05288DB67300E3FF8B /* Info.plist */,
 				072B887E2888D7960016BC95 /* Assets.xcassets */,
 				072B88802888D7960016BC95 /* Preview Content */,
 			);
@@ -152,6 +164,8 @@
 			children = (
 				072B889F2888FA1C0016BC95 /* AddView.swift */,
 				072B88A12888FA2A0016BC95 /* AddViewModel.swift */,
+				078760672898DBD200285CC1 /* AddFormView.swift */,
+				078760692898DF7800285CC1 /* AddFormViewModel.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -172,6 +186,16 @@
 				072B88A92888FA990016BC95 /* MoreViewModel.swift */,
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		0787606028986A0E00285CC1 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				0787606128986A1B00285CC1 /* CameraView.swift */,
+				078760632898A11400285CC1 /* CameraService.swift */,
+				078760652898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		078FF9C8288AEF0F00BD5E7D /* Account */ = {
@@ -282,19 +306,25 @@
 				07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */,
 				072B88912888DCF90016BC95 /* LaunchView.swift in Sources */,
 				072B88AA2888FA990016BC95 /* MoreViewModel.swift in Sources */,
+				0787606228986A1B00285CC1 /* CameraView.swift in Sources */,
 				072B88A42888FA590016BC95 /* RecipesView.swift in Sources */,
 				0704B9CB288C5B9500E216D8 /* AlertItemView.swift in Sources */,
 				072B88A22888FA2A0016BC95 /* AddViewModel.swift in Sources */,
 				072B88A02888FA1C0016BC95 /* AddView.swift in Sources */,
+				078760682898DBD200285CC1 /* AddFormView.swift in Sources */,
+				078760642898A11400285CC1 /* CameraService.swift in Sources */,
 				078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */,
 				07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */,
+				0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */,
 				07F1D7B7288BA37C00178430 /* IconView.swift in Sources */,
 				072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */,
+				078760662898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift in Sources */,
 				078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */,
 				072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */,
 				072B88932888DD0C0016BC95 /* LaunchViewModel.swift in Sources */,
 				072B889C2888F9E80016BC95 /* ItemsView.swift in Sources */,
 				072B88A82888FA8A0016BC95 /* MoreView.swift in Sources */,
+				0787605B28982B8C00285CC1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +457,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow to take pictures of food items.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -457,6 +488,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please allow to take pictures of food items.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -8,8 +8,41 @@
 import SwiftUI
 
 struct AddView: View {
+    @StateObject var addViewModel = AddViewModel()
+    @State private var capturedPhoto: UIImage?
+    
     var body: some View {
-        Text("Add View")
+        NavigationView {
+            VStack{
+                Text("Add View")
+                    .padding(.bottom)
+            }
+            .navigationTitle("Add Food item")
+            .offset(y: -60)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        addViewModel.showCamera.toggle()
+                    } label: {
+                        Image(systemName: "plus.viewfinder")
+                    }
+
+                }
+            }
+            .sheet(isPresented: $addViewModel.showCamera) {
+                if capturedPhoto != nil {
+                    addViewModel.showForm.toggle()
+                }
+            } content: {
+                CaptureFoodItemPhotoView(capturedImage: $capturedPhoto)
+            }
+            .sheet(isPresented: $addViewModel.showForm) {
+                capturedPhoto = nil
+            } content: {
+                AddFormView(capturedPhoto: capturedPhoto!)
+            }
+
+        }
     }
 }
 

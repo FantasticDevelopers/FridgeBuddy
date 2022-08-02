@@ -10,7 +10,6 @@ import FirebaseAuth
 
 @MainActor final class LaunchViewModel : ObservableObject {
     @Published var isLogin : Bool = false
-    var i : Int = 1
     
     func checkLogin() {
         isLogin = Auth.auth().currentUser == nil ? false : true

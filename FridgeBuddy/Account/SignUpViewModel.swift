@@ -1,5 +1,5 @@
 //
-//  SignViewModel.swift
+//  SignUpViewModel.swift
 //  FridgeBuddy
 //
 //  Created by Amandeep on 2022-07-22.

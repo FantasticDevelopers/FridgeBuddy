@@ -12,38 +12,40 @@ struct LoginView: View {
     @EnvironmentObject var launchViewModel : LaunchViewModel
     
     var body: some View {
-        VStack {
-            Spacer()
-            
-            IconView()
-            
-            Spacer()
-            
-            TextFieldView(text: "Email", value: $loginViewModel.email)
-            
-            SecureTextFieldView(text: "Password", value: $loginViewModel.password)
-            
-            Button {
-                Task {
-                    await loginViewModel.signIn()
-                    launchViewModel.checkLogin()
+        NavigationView {
+            VStack {
+                Spacer()
+                
+                IconView()
+                
+                Spacer()
+                
+                TextFieldView(text: "Email", value: $loginViewModel.email)
+                
+                SecureTextFieldView(text: "Password", value: $loginViewModel.password)
+                
+                Button {
+                    Task {
+                        await loginViewModel.signIn()
+                        launchViewModel.checkLogin()
+                    }
+                } label: {
+                   ButtonView(buttonText: "Sign In")
                 }
-            } label: {
-               ButtonView(buttonText: "Sign In")
+                
+                Spacer()
+                
+                NavigationLink(destination: SignUpView().offset(y: -50)) {
+                    Text("Want to create an account? Sign Up")
+                }
             }
-            
-            Spacer()
-            
-            NavigationLink(destination: SignUpView().offset(y: -50)) {
-                Text("Want to create an account? Sign Up")
-                    .foregroundColor(.green)
+            .padding()
+            .alert(loginViewModel.alertItem.title, isPresented: $loginViewModel.alertItem.showAlert) {
+                Button(loginViewModel.alertItem.buttonTitle) {}
+            } message: {
+                loginViewModel.alertItem.message
             }
-        }
-        .padding()
-        .alert(loginViewModel.alertItem.title, isPresented: $loginViewModel.alertItem.showAlert) {
-            Button(loginViewModel.alertItem.buttonTitle) {}
-        } message: {
-            loginViewModel.alertItem.message
+            .offset(y: -60)
         }
     }
 }
