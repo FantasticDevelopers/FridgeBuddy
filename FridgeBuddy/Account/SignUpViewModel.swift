@@ -22,10 +22,7 @@ import Firebase
                 try await Auth.auth().createUser(withEmail: email, password: password)
             } catch {
                 DispatchQueue.main.async { [self] in
-                    alertItem.title = Text("Please try again!")
-                    alertItem.message = Text("\(error.localizedDescription)")
-                    alertItem.buttonTitle = "Got it!"
-                    alertItem.showAlert = true
+                    alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                 }
                 return
             }
@@ -38,10 +35,7 @@ import Firebase
                 try await ref.setData(["name" : name], merge: true)
             } catch {
                 DispatchQueue.main.async { [self] in
-                    alertItem.title = Text("Please try again!")
-                    alertItem.message = Text("\(error.localizedDescription)")
-                    alertItem.buttonTitle = "Got it!"
-                    alertItem.showAlert = true
+                    alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                 }
             }
         }
@@ -49,10 +43,7 @@ import Firebase
     
     private func checkCorrectPassword() -> Bool {
         if password != confirmPassword {
-            alertItem.title = Text("Please try again!")
-            alertItem.message = Text("Password and Confirm Password are different")
-            alertItem.buttonTitle = "Got it!"
-            alertItem.showAlert = true
+            alertItem.show(title: "Please try again!", message: "Password and Confirm Password are different", buttonTitle: "Got it!")
             return false
         }
         return true

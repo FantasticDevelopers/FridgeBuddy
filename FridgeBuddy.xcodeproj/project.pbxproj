@@ -28,7 +28,7 @@
 		0787605B28982B8C00285CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787605A28982B8C00285CC1 /* AppDelegate.swift */; };
 		0787606228986A1B00285CC1 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787606128986A1B00285CC1 /* CameraView.swift */; };
 		078760642898A11400285CC1 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760632898A11400285CC1 /* CameraService.swift */; };
-		078760662898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760652898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift */; };
+		078760662898D1AD00285CC1 /* CaptureItemPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */; };
 		078760682898DBD200285CC1 /* AddFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760672898DBD200285CC1 /* AddFormView.swift */; };
 		0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760692898DF7800285CC1 /* AddFormViewModel.swift */; };
 		078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9C9288AEF2300BD5E7D /* LoginView.swift */; };
@@ -61,7 +61,7 @@
 		0787605A28982B8C00285CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0787606128986A1B00285CC1 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		078760632898A11400285CC1 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
-		078760652898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureFoodItemPhotoView.swift; sourceTree = "<group>"; };
+		078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureItemPhotoView.swift; sourceTree = "<group>"; };
 		078760672898DBD200285CC1 /* AddFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormView.swift; sourceTree = "<group>"; };
 		078760692898DF7800285CC1 /* AddFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormViewModel.swift; sourceTree = "<group>"; };
 		078FF9C9288AEF2300BD5E7D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 			children = (
 				0787606128986A1B00285CC1 /* CameraView.swift */,
 				078760632898A11400285CC1 /* CameraService.swift */,
-				078760652898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift */,
+				078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -318,7 +318,7 @@
 				0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */,
 				07F1D7B7288BA37C00178430 /* IconView.swift in Sources */,
 				072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */,
-				078760662898D1AD00285CC1 /* CaptureFoodItemPhotoView.swift in Sources */,
+				078760662898D1AD00285CC1 /* CaptureItemPhotoView.swift in Sources */,
 				078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */,
 				072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */,
 				072B88932888DD0C0016BC95 /* LaunchViewModel.swift in Sources */,

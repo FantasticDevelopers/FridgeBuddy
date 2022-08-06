@@ -38,7 +38,7 @@ struct LaunchView: View {
         else {
             LoginView()
                 .onAppear {
-                    launchViewModel.checkLogin()
+                    launchViewModel.checkLogin(firstCheck: true)
                 }
         }
     }

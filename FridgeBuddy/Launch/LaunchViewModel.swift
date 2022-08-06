@@ -11,7 +11,13 @@ import FirebaseAuth
 @MainActor final class LaunchViewModel : ObservableObject {
     @Published var isLogin : Bool = false
     
-    func checkLogin() {
-        isLogin = Auth.auth().currentUser == nil ? false : true
+    func checkLogin(firstCheck : Bool = false) {
+        if firstCheck {
+            isLogin = Auth.auth().currentUser == nil ? false : true
+        } else {
+            withAnimation {
+                isLogin = Auth.auth().currentUser == nil ? false : true
+            }
+        }
     }
 }

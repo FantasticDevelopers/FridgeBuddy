@@ -30,15 +30,9 @@ struct AddView: View {
                 }
             }
             .sheet(isPresented: $addViewModel.showCamera) {
-                if capturedPhoto != nil {
-                    addViewModel.showForm.toggle()
-                }
-            } content: {
-                CaptureFoodItemPhotoView(capturedImage: $capturedPhoto)
+                CaptureItemPhotoView(capturedImage: $capturedPhoto, showForm: $addViewModel.showForm)
             }
             .sheet(isPresented: $addViewModel.showForm) {
-                capturedPhoto = nil
-            } content: {
                 AddFormView(capturedPhoto: capturedPhoto!)
             }
 

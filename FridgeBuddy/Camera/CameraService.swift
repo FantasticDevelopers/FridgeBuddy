@@ -56,11 +56,27 @@ class CameraService {
                 
                 previewlayer.videoGravity = .resizeAspectFill
                 previewlayer.session = session
-                
-                session.startRunning()
+
                 self.session = session
+                startSession()
             } catch  {
                 completion(error)
+            }
+        }
+    }
+    
+    func startSession() {
+        if let session = session {
+            if !session.isRunning {
+                session.startRunning()
+            }
+        }
+    }
+    
+    func stopSession() {
+        if let session = session {
+            if session.isRunning {
+                session.stopRunning()
             }
         }
     }

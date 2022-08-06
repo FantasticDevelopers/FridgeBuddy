@@ -13,7 +13,7 @@ struct AddFormView: View {
     var body: some View {
         Image(uiImage: capturedPhoto)
             .resizable()
-            .frame(width: 200, height: 200)
+            .frame(width: 250, height: 200)
     }
 }
 

@@ -9,16 +9,23 @@ import SwiftUI
 
 struct ButtonView: View {
     var buttonText : String
+    var width : CGFloat = 200
+    var symbol : String?
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .frame(width: 200, height: 45)
+                .frame(width: width, height: 45)
                 .foregroundColor(.green)
                 .opacity(0.2)
             
-            Text(buttonText)
-                .foregroundColor(.green)
+            if let symbol = symbol {
+                Label(buttonText, systemImage: symbol)
+                    .foregroundColor(.green)
+            } else {
+                Text(buttonText)
+                    .foregroundColor(.green)
+            }
         }
     }
 }

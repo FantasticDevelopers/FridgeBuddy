@@ -13,5 +13,12 @@ struct AlertItemView: Identifiable {
     var message : Text = Text("")
     var buttonTitle : String = ""
     var showAlert : Bool = false
+    
+    mutating func show(title : String, message : String, buttonTitle : String) {
+        self.title = Text(title)
+        self.message = Text(message)
+        self.buttonTitle = buttonTitle
+        self.showAlert = true
+    }
 }
 

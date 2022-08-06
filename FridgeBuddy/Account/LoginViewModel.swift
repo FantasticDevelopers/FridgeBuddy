@@ -18,10 +18,7 @@ import FirebaseAuth
             try await Auth.auth().signIn(withEmail: email, password: password)
         } catch {
             DispatchQueue.main.async { [self] in
-                alertItem.title = Text("Please try again!")
-                alertItem.message = Text("\(error.localizedDescription)")
-                alertItem.buttonTitle = "Got it!"
-                alertItem.showAlert = true
+                alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
             }
         }
     }
