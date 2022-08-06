@@ -10,7 +10,7 @@ import AVFoundation
 
 class CameraService {
     
-    var session : AVCaptureSession?
+    var session = AVCaptureSession()
     var delegate : AVCapturePhotoCaptureDelegate?
     
     let output = AVCapturePhotoOutput()
@@ -42,10 +42,10 @@ class CameraService {
     }
     
     private func setupCamera(completion: @escaping (Error?) -> ()) {
-        let session = AVCaptureSession()
-        if let device = AVCaptureDevice.default(for: .video) {
-            do {
-                let input = try AVCaptureDeviceInput(device: device )
+        do {
+            session.beginConfiguration()
+            if let device = AVCaptureDevice.default(for: .video) {
+                let input = try AVCaptureDeviceInput(device: device)
                 if session.canAddInput(input) {
                     session.addInput(input)
                 }
@@ -54,30 +54,27 @@ class CameraService {
                     session.addOutput(output)
                 }
                 
+                session.commitConfiguration()
+                
                 previewlayer.videoGravity = .resizeAspectFill
                 previewlayer.session = session
-
-                self.session = session
+                
                 startSession()
-            } catch  {
-                completion(error)
             }
+        } catch {
+            completion(error)
         }
     }
     
     func startSession() {
-        if let session = session {
-            if !session.isRunning {
-                session.startRunning()
-            }
+        if !session.isRunning {
+            session.startRunning()
         }
     }
     
     func stopSession() {
-        if let session = session {
-            if session.isRunning {
-                session.stopRunning()
-            }
+        if session.isRunning {
+            session.stopRunning()
         }
     }
     

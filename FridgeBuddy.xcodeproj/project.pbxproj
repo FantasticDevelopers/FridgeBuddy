@@ -11,6 +11,7 @@
 		0704B9CE288C7CC600E216D8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0704B9CD288C7CC600E216D8 /* FirebaseAuth */; };
 		0704B9D0288C7CC600E216D8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0704B9CF288C7CC600E216D8 /* FirebaseFirestore */; };
 		0704B9D2288C7CC600E216D8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0704B9D1288C7CC600E216D8 /* FirebaseStorage */; };
+		07202F25289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07202F24289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift */; };
 		072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B887A2888D7940016BC95 /* FridgeBuddyApp.swift */; };
 		072B887F2888D7960016BC95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072B887E2888D7960016BC95 /* Assets.xcassets */; };
 		072B88822888D7960016BC95 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072B88812888D7960016BC95 /* Preview Assets.xcassets */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		0704B9CA288C5B9500E216D8 /* AlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItemView.swift; sourceTree = "<group>"; };
+		07202F24289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureItemPhotoViewModel.swift; sourceTree = "<group>"; };
 		072B88772888D7940016BC95 /* FridgeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FridgeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		072B887A2888D7940016BC95 /* FridgeBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeBuddyApp.swift; sourceTree = "<group>"; };
 		072B887E2888D7960016BC95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07202F21289EE42A00C68AC3 /* CaptureItemphoto */ = {
+			isa = PBXGroup;
+			children = (
+				078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */,
+				07202F24289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift */,
+			);
+			path = CaptureItemphoto;
+			sourceTree = "<group>";
+		};
 		072B886E2888D7940016BC95 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				07F1D7AF288B99CE00178430 /* Helpers */,
+				07202F21289EE42A00C68AC3 /* CaptureItemphoto */,
 				0787606028986A0E00285CC1 /* Camera */,
 				078FF9C8288AEF0F00BD5E7D /* Account */,
 				072B889A2888F9C80016BC95 /* More */,
@@ -193,7 +205,6 @@
 			children = (
 				0787606128986A1B00285CC1 /* CameraView.swift */,
 				078760632898A11400285CC1 /* CameraService.swift */,
-				078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -303,6 +314,7 @@
 				072B889E2888F9FE0016BC95 /* ItemsViewModel.swift in Sources */,
 				07F1D7B1288B9A0C00178430 /* ButtonView.swift in Sources */,
 				078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */,
+				07202F25289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift in Sources */,
 				07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */,
 				072B88912888DCF90016BC95 /* LaunchView.swift in Sources */,
 				072B88AA2888FA990016BC95 /* MoreViewModel.swift in Sources */,
