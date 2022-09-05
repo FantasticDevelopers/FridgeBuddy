@@ -11,4 +11,5 @@ import SwiftUI
     @Published var cameraService = CameraService()
     @Published var showCamera : Bool = true
     @Published var alertItem = AlertItemView()
+    @Published var capturedImage : UIImage?
 }

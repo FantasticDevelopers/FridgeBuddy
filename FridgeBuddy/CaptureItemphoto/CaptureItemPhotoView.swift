@@ -9,10 +9,8 @@ import SwiftUI
 
 struct CaptureItemPhotoView : View {
     @StateObject var captureItemPhotoViewModel = CaptureItemPhotoViewModel()
-    
-    @Binding var capturedImage: UIImage?
-    @Binding var showForm : Bool
-    
+    @ObservedObject var addViewModel : AddViewModel
+        
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
@@ -22,7 +20,7 @@ struct CaptureItemPhotoView : View {
                     switch result {
                     case .success(let photo):
                         if let data = photo.fileDataRepresentation() {
-                            capturedImage = UIImage(data: data)
+                            captureItemPhotoViewModel.capturedImage = UIImage(data: data)
                             captureItemPhotoViewModel.cameraService.stopSession()
                             withAnimation {
                                 captureItemPhotoViewModel.showCamera.toggle()
@@ -34,15 +32,16 @@ struct CaptureItemPhotoView : View {
                         captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                     }
                 }
+                .ignoresSafeArea(.all)
                 
                 VStack {
                     HStack {
                         Button {
                             presentationMode.wrappedValue.dismiss()
                         } label: {
-                             Image(systemName: "arrowshape.turn.up.backward.fill")
+                             Image(systemName: "xmark")
                                 .resizable()
-                                .frame(width: 40, height: 20)
+                                .frame(width: 20, height: 20)
                                 .padding(.leading)
                                 .padding(.top)
                         }
@@ -75,54 +74,55 @@ struct CaptureItemPhotoView : View {
                 captureItemPhotoViewModel.alertItem.message
             }
         } else {
-            VStack {
-                HStack {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                         Image(systemName: "arrowshape.turn.up.backward.fill")
-                            .resizable()
-                            .frame(width: 40, height: 20)
-                            .padding(.leading)
-                            .padding(.top)
-                    }
+            NavigationView {
+                VStack {
+                    Spacer()
+                    Image(uiImage: captureItemPhotoViewModel.capturedImage!)
+                        .resizable()
+                        .frame(width: 300, height: 300)
                     
                     Spacer()
-                }
-                
-                Spacer()
-                
-                Image(uiImage: capturedImage!)
-                    .resizable()
-                    .frame(width: 300, height: 300)
-                
-                Spacer()
-                
-                HStack {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                        withAnimation {
-                            showForm.toggle()
+                    Spacer()
+                    
+                    HStack {
+                        NavigationLink(destination: AddFormView(addViewModel: addViewModel ,capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
+                            ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
+                                .padding(.leading)
                         }
-                    } label: {
-                        ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
-                            .padding(.leading)
-                    }
-                    
-                    Spacer()
-                   
-                    Button {
-                        DispatchQueue.global(qos: .background).async {
-                            captureItemPhotoViewModel.cameraService.startSession()
-                            DispatchQueue.main.async {
-                                withAnimation {
-                                    captureItemPhotoViewModel.showCamera.toggle()
+                        
+                        Spacer()
+                       
+                        Button {
+                            DispatchQueue.global(qos: .background).async {
+                                captureItemPhotoViewModel.cameraService.startSession()
+                                DispatchQueue.main.async {
+                                    withAnimation {
+                                        captureItemPhotoViewModel.showCamera.toggle()
+                                    }
                                 }
                             }
+                        } label: {
+                            ButtonView(buttonText: "Retake", width: 150, symbol: "camera.circle.fill")
+                                .padding(.trailing)
                         }
-                    } label: {
-                        ButtonView(buttonText: "Retake", width: 150, symbol: "camera.circle.fill")
-                            .padding(.trailing)
+                    }
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Image(systemName: "arrowshape.turn.up.backward.fill")
+                                .resizable()
+                                .frame(width: 30, height: 20)
+                                .foregroundColor(Color.green)
+                        }
+                        
+                    }
+                    
+                    ToolbarItem(placement: .principal) {
+                        Text("Public Photo")
+                        
                     }
                 }
             }
@@ -132,7 +132,7 @@ struct CaptureItemPhotoView : View {
 
 struct CaptureItemPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        CaptureItemPhotoView(capturedImage: .constant(UIImage(imageLiteralResourceName: "LoginIcon")), showForm: .constant(false))
+        CaptureItemPhotoView(addViewModel: AddViewModel())
     }
 }
 

@@ -9,16 +9,37 @@ import SwiftUI
 
 struct AddView: View {
     @StateObject var addViewModel = AddViewModel()
-    @State private var capturedPhoto: UIImage?
     
     var body: some View {
         NavigationView {
-            VStack{
-                Text("Add View")
-                    .padding(.bottom)
+            List(addViewModel.items, id: \.id) { item in
+                HStack{
+                    if item.image != nil {
+                        Image(uiImage: item.image!)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 70)
+                            .cornerRadius(10)
+                    } else {
+                        Image("NoImage")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 70)
+                            .cornerRadius(10)
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text(item.name)
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
+                        
+                        Text(item.category)
+                            .font(.subheadline)
+                    }
+                }
             }
             .navigationTitle("Add Food item")
-            .offset(y: -60)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
@@ -29,13 +50,14 @@ struct AddView: View {
 
                 }
             }
-            .sheet(isPresented: $addViewModel.showCamera) {
-                CaptureItemPhotoView(capturedImage: $capturedPhoto, showForm: $addViewModel.showForm)
+            .fullScreenCover(isPresented: $addViewModel.showCamera) {
+                CaptureItemPhotoView(addViewModel: addViewModel)
             }
-            .sheet(isPresented: $addViewModel.showForm) {
-                AddFormView(capturedPhoto: capturedPhoto!)
+            .onAppear {
+                if addViewModel.items.isEmpty {
+                    addViewModel.loadItems()
+                }
             }
-
         }
     }
 }
