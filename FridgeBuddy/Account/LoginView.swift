@@ -45,7 +45,7 @@ struct LoginView: View {
             } message: {
                 loginViewModel.alertItem.message
             }
-            .offset(y: -60)
+            .navigationBarHidden(true)
         }
     }
 }

@@ -13,9 +13,9 @@ class Item : Identifiable {
     var name : String
     var brand : String
     var category : String
-    var state : String
-    var quantity : Int
-    var expiryDate : Date
+    var state : String?
+    var quantity : Int?
+    var expiryDate : Date?
     var expiryDays : Int?
     var upc : String?
     var image : UIImage?
@@ -34,14 +34,11 @@ class Item : Identifiable {
         self.isBarcodeItem = false
     }
     
-    init(id : String, name : String, brand : String, category : String, state : String, quantity : Int, expiryDate : Date, imageReference : String, isBarcodeItem : Bool) {
+    init(id : String, name : String, brand : String, category : String, imageReference : String, isBarcodeItem : Bool) {
         self.id = id
         self.name = name
         self.brand = brand
         self.category = category
-        self.state = state
-        self.quantity = quantity
-        self.expiryDate = expiryDate
         self.imageReference = imageReference
         self.isBarcodeItem = isBarcodeItem
     }

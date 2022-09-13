@@ -12,6 +12,8 @@ import FirebaseStorage
 @MainActor final class AddFormViewModel : ObservableObject {
     @Published var item = Item()
     @Published var alertItem = AlertItemView()
+    @Published var expiryDate : Date = Date()
+    @Published var quantity : Int = 1
     
     public func addNonBarcodeItem(completion: @escaping (Item?) -> Void) {
         let storageRef = Storage.storage().reference()
@@ -41,9 +43,6 @@ import FirebaseStorage
                 "name": item.name,
                 "brand": item.brand,
                 "category": item.category,
-                "state": "Fresh",
-                "quantity": item.quantity,
-                "expiryDate": Timestamp(date: item.expiryDate),
                 "expiryDays": item.expiryDays!,
                 "imageReference": item.imageReference,
                 "isBarcodeItem": item.isBarcodeItem
@@ -53,7 +52,7 @@ import FirebaseStorage
                     return
                 }
                 
-                let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, state: self.item.state, quantity: self.item.quantity, expiryDate: self.item.expiryDate, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
+                let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
                 item.image = self.item.image
                 item.expiryDays = self.item.expiryDays
                 
@@ -65,7 +64,7 @@ import FirebaseStorage
     private func calculateExpiryDays() {
         let calendar = Calendar.current
         let currentDate = calendar.startOfDay(for: Date())
-        let expiryDate = calendar.startOfDay(for: item.expiryDate)
+        let expiryDate = calendar.startOfDay(for: expiryDate)
         
         let components = calendar.dateComponents([.day], from: currentDate, to: expiryDate)
         item.expiryDays = components.day

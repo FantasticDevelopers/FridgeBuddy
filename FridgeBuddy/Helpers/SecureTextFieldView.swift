@@ -37,8 +37,7 @@ struct SecureTextFieldView: View {
 }
 
 struct SecureTextFieldView_Previews: PreviewProvider {
-    @State static var value : String = "Password"
     static var previews: some View {
-        SecureTextFieldView(text: "Name", value: $value)
+        SecureTextFieldView(text: "Password", value: .constant(""))
     }
 }

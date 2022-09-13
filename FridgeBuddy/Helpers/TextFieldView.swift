@@ -22,8 +22,7 @@ struct TextFieldView: View {
 }
 
 struct TextFieldView_Previews: PreviewProvider {
-    @State static var value : String = "Name"
     static var previews: some View {
-        TextFieldView(text: "Name", value: $value)
+        TextFieldView(text: "Name", value: .constant(""))
     }
 }

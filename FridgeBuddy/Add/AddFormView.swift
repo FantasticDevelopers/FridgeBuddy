@@ -33,14 +33,14 @@ struct AddFormView: View {
                 
                 TextFieldView(text: "Category", value: $addFormViewModel.item.category)
                 
-                DatePicker("Expiry Date", selection: $addFormViewModel.item.expiryDate, in: Date()..., displayedComponents: .date)
+                DatePicker("Expiry Date", selection: $addFormViewModel.expiryDate, in: Date()..., displayedComponents: .date)
                     .padding(.vertical, 5.0)
                     .padding(.horizontal)
                     .background(RoundedRectangle(cornerRadius: 4)
                         .stroke( Color.black.opacity(0.7), lineWidth: 2))
                     .padding(.bottom)
                 
-                Stepper("Quantity: \(addFormViewModel.item.quantity)", value: $addFormViewModel.item.quantity, in: 1...1000)
+                Stepper("Quantity: \(addFormViewModel.quantity)", value: $addFormViewModel.quantity, in: 1...1000)
                     .padding(.vertical, 5.0)
                     .padding(.horizontal)
                     .background(RoundedRectangle(cornerRadius: 4)

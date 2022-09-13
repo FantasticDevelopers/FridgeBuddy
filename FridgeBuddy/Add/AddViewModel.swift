@@ -12,6 +12,12 @@ import FirebaseStorage
 @MainActor final class AddViewModel : ObservableObject {
     @Published var showCamera : Bool = false
     @Published var items : [Item] = []
+    @Published var searchText : String = ""
+    @Published var isEditing : Bool = false
+    @Published var offset : CGFloat = 0
+    @Published var startOffset : CGFloat = 0
+    @Published var titleOffset : CGFloat = 0
+    @Published var titleBarHeight : CGFloat = 0
     
     public func loadItems() {
         let db = Firestore.firestore()
@@ -23,7 +29,7 @@ import FirebaseStorage
             
             if let snapshot = snapshot {
                 let items : [Item] = snapshot.documents.map { itemData in
-                    let item = Item(id: itemData.documentID, name: itemData["name"] as? String ?? "", brand: itemData["brand"] as? String ?? "", category: itemData["category"] as? String ?? "", state: itemData["state"] as? String ?? "", quantity: itemData["quantity"] as? Int ?? 0, expiryDate: itemData["expiryDate"] as? Date ?? Date(), imageReference: itemData["imageReference"] as? String ?? "", isBarcodeItem: itemData["isBarcodeItem"] as? Bool ?? false)
+                    let item = Item(id: itemData.documentID, name: itemData["name"] as? String ?? "", brand: itemData["brand"] as? String ?? "", category: itemData["category"] as? String ?? "", imageReference: itemData["imageReference"] as? String ?? "", isBarcodeItem: itemData["isBarcodeItem"] as? Bool ?? false)
                     
                     
                     if let expiryDays = itemData["expiryDays"] as? Int {
@@ -52,13 +58,31 @@ import FirebaseStorage
                         count += 1
                         items[index].image = UIImage(data: data!)
                         DispatchQueue.main.async {
-                            if items.count == count {
                                 self.items = items
-                            }
                         }
                     }
                 }
             }
+        }
+    }
+    
+    public func getOffset() -> CGSize {
+        var size : CGSize = .zero
+        let screenWidth = UIScreen.main.bounds.width / 2.1
+        
+        size.width = (offset > 0) ? (offset * 1.5 <= (screenWidth - titleOffset) ? offset * 1.5 : (screenWidth - titleOffset)) : 0
+        size.height = (offset > 0) ? (offset <= 36 ? -offset : -36) : 0
+        
+        return size
+    }
+    
+    public func getScale() -> CGFloat {
+        if offset > 0 {
+            let screenWidth = UIScreen.main.bounds.width
+            let progress = 1 - (getOffset().width / screenWidth)
+            return progress >= 0.9 ? progress : 0.9
+        } else {
+            return 1
         }
     }
 }
