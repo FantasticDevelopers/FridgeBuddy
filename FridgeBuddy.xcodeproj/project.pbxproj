@@ -11,6 +11,7 @@
 		0704B9CE288C7CC600E216D8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0704B9CD288C7CC600E216D8 /* FirebaseAuth */; };
 		0704B9D0288C7CC600E216D8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0704B9CF288C7CC600E216D8 /* FirebaseFirestore */; };
 		0704B9D2288C7CC600E216D8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0704B9D1288C7CC600E216D8 /* FirebaseStorage */; };
+		071B63BC28DBFCB5007B56AE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071B63BB28DBFCB5007B56AE /* Category.swift */; };
 		07202F25289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07202F24289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift */; };
 		07202F27289F0D4500C68AC3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07202F26289F0D4500C68AC3 /* Item.swift */; };
 		072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B887A2888D7940016BC95 /* FridgeBuddyApp.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		0704B9CA288C5B9500E216D8 /* AlertItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItemView.swift; sourceTree = "<group>"; };
+		071B63BB28DBFCB5007B56AE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		07202F24289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureItemPhotoViewModel.swift; sourceTree = "<group>"; };
 		07202F26289F0D4500C68AC3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		072B88772888D7940016BC95 /* FridgeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FridgeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 			children = (
 				0704B9CA288C5B9500E216D8 /* AlertItemView.swift */,
 				07202F26289F0D4500C68AC3 /* Item.swift */,
+				071B63BB28DBFCB5007B56AE /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				072B88AA2888FA990016BC95 /* MoreViewModel.swift in Sources */,
 				0787606228986A1B00285CC1 /* CameraView.swift in Sources */,
 				072B88A42888FA590016BC95 /* RecipesView.swift in Sources */,
+				071B63BC28DBFCB5007B56AE /* Category.swift in Sources */,
 				0704B9CB288C5B9500E216D8 /* AlertItemView.swift in Sources */,
 				072B88A22888FA2A0016BC95 /* AddViewModel.swift in Sources */,
 				072B88A02888FA1C0016BC95 /* AddView.swift in Sources */,

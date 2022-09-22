@@ -10,6 +10,7 @@ import SwiftUI
 struct AddFormView: View {
     @StateObject var addFormViewModel = AddFormViewModel()
     @ObservedObject var addViewModel : AddViewModel
+    @EnvironmentObject var launchViewModel : LaunchViewModel
     
     var capturedPhoto : UIImage
     
@@ -24,6 +25,7 @@ struct AddFormView: View {
             Image(uiImage: capturedPhoto)
                 .resizable()
                 .frame(width: 200, height: 200)
+                .cornerRadius(10)
                 .padding(.bottom)
             
             Group {
@@ -52,7 +54,7 @@ struct AddFormView: View {
                 addFormViewModel.item.image = capturedPhoto
                 addFormViewModel.addNonBarcodeItem { item in
                     if let item = item {
-                        addViewModel.items.append(item)
+                        launchViewModel.items.append(item)
                     }
                 }
                 addViewModel.showCamera.toggle()

@@ -34,6 +34,11 @@ struct LaunchView: View {
                         Text("More")
                     }
             }
+            .onAppear {
+                if launchViewModel.items.isEmpty {
+                    launchViewModel.loadItems()
+                }
+            }
         }
         else {
             LoginView()

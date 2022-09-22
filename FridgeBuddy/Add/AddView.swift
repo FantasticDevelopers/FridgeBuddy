@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddView: View {
     @StateObject var addViewModel = AddViewModel()
+    @EnvironmentObject var launchViewModel : LaunchViewModel
     
     @Environment(\.colorScheme) var scheme
     
@@ -85,7 +86,7 @@ struct AddView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(addViewModel.isEditing ? addViewModel.items.filter{$0.name.lowercased().contains(addViewModel.searchText.lowercased())} : addViewModel.items) { item in
+                    ForEach(addViewModel.isEditing ? launchViewModel.items.filter{$0.name.lowercased().contains(addViewModel.searchText.lowercased())} : launchViewModel.items) { item in
                         HStack{
                             
                             if item.image != nil {
@@ -149,11 +150,6 @@ struct AddView: View {
         }
         .fullScreenCover(isPresented: $addViewModel.showCamera) {
                         CaptureItemPhotoView(addViewModel: addViewModel)
-        }
-        .onAppear {
-            if addViewModel.items.isEmpty {
-                addViewModel.loadItems()
-            }
         }
     }
 }

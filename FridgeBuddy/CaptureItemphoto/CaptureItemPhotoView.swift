@@ -20,11 +20,7 @@ struct CaptureItemPhotoView : View {
                     switch result {
                     case .success(let photo):
                         if let data = photo.fileDataRepresentation() {
-                            captureItemPhotoViewModel.capturedImage = UIImage(data: data)
-                            captureItemPhotoViewModel.cameraService.stopSession()
-                            withAnimation {
-                                captureItemPhotoViewModel.showCamera.toggle()
-                            }
+                            captureItemPhotoViewModel.cropImage(data: data)
                         } else {
                             captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
                         }
@@ -38,6 +34,7 @@ struct CaptureItemPhotoView : View {
                     HStack {
                         Button {
                             presentationMode.wrappedValue.dismiss()
+                            captureItemPhotoViewModel.cameraService.stopSession()
                         } label: {
                              Image(systemName: "xmark")
                                 .resizable()
@@ -79,7 +76,8 @@ struct CaptureItemPhotoView : View {
                     Spacer()
                     Image(uiImage: captureItemPhotoViewModel.capturedImage!)
                         .resizable()
-                        .frame(width: 300, height: 300)
+                        .cornerRadius(10)
+                        .frame(width: captureItemPhotoViewModel.cameraService.previewlayer.frame.width, height: captureItemPhotoViewModel.cameraService.previewlayer.frame.height)
                     
                     Spacer()
                     Spacer()
