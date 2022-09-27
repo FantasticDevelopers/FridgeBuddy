@@ -1,23 +1,22 @@
 //
-//  CameraService.swift
+//  CameraBarcodeService.swift
 //  FridgeBuddy
 //
-//  Created by Amandeep on 2022-08-01.
-//  Modified by Inderdeep on 2022-09-20.
+//  Created by Inderdeep on 2022-09-25.
 //
 
 import Foundation
 import AVFoundation
 
-class CameraService {
+class CameraBarcodeService {
     
     var session = AVCaptureSession()
-    var delegate : AVCapturePhotoCaptureDelegate?
+    var delegate : AVCaptureMetadataOutputObjectsDelegate?
     
-    let output = AVCapturePhotoOutput()
+    let output = AVCaptureMetadataOutput()
     let previewlayer = AVCaptureVideoPreviewLayer()
     
-    func start(delegate : AVCapturePhotoCaptureDelegate, completion: @escaping (Error?) -> ()) {
+    func start(delegate : AVCaptureMetadataOutputObjectsDelegate, completion: @escaping (Error?) -> ()) {
         self.delegate = delegate
         checkPermissions(completion: completion)
     }
@@ -31,7 +30,7 @@ class CameraService {
                     self?.setupCamera(completion: completion)
                 }
             }
-        case .restricted: 
+        case .restricted:
             break
         case .denied:
             break
@@ -53,6 +52,9 @@ class CameraService {
                 
                 if session.canAddOutput(output) {
                     session.addOutput(output)
+                    
+                    output.setMetadataObjectsDelegate(delegate!, queue: DispatchQueue.main)
+                    output.metadataObjectTypes = [ .upce , .ean13 , .ean8]
                 }
                 
                 session.commitConfiguration()
@@ -78,8 +80,10 @@ class CameraService {
             session.stopRunning()
         }
     }
+    // code has no implementation but remains here
+//    func captureCode(with settings : AVCapturePhotoSettings = AVCapturePhotoSettings()) {
+//        output.capturePhoto(with: settings, delegate: delegate!)
+//    }
     
-    func capturePhoto(with settings : AVCapturePhotoSettings = AVCapturePhotoSettings()) {
-        output.capturePhoto(with: settings, delegate: delegate!)
-    }
 }
+

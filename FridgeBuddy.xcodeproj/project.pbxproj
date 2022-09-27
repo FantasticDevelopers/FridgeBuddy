@@ -42,6 +42,8 @@
 		07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B2288B9C0700178430 /* TextFieldView.swift */; };
 		07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */; };
 		07F1D7B7288BA37C00178430 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B6288BA37C00178430 /* IconView.swift */; };
+		86CBBBE028E0FEF9004494E1 /* CameraBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */; };
+		86CBBBE228E10ACF004494E1 /* CameraBarcodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		07F1D7B2288B9C0700178430 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B6288BA37C00178430 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeView.swift; sourceTree = "<group>"; };
+		86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +214,8 @@
 			children = (
 				0787606128986A1B00285CC1 /* CameraView.swift */,
 				078760632898A11400285CC1 /* CameraService.swift */,
+				86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */,
+				86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -344,7 +350,9 @@
 				072B88932888DD0C0016BC95 /* LaunchViewModel.swift in Sources */,
 				072B889C2888F9E80016BC95 /* ItemsView.swift in Sources */,
 				072B88A82888FA8A0016BC95 /* MoreView.swift in Sources */,
+				86CBBBE028E0FEF9004494E1 /* CameraBarcodeView.swift in Sources */,
 				0787605B28982B8C00285CC1 /* AppDelegate.swift in Sources */,
+				86CBBBE228E10ACF004494E1 /* CameraBarcodeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +481,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FridgeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = 8MJU534P5N;
+				DEVELOPMENT_TEAM = N7WB37K3MQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
@@ -504,7 +512,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FridgeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = 8MJU534P5N;
+				DEVELOPMENT_TEAM = N7WB37K3MQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;

@@ -3,6 +3,7 @@
 //  FridgeBuddy
 //
 //  Created by Amandeep on 2022-08-01.
+//  Modified by Inderdeep on 2022-09-25.
 //
 
 import SwiftUI
@@ -16,17 +17,25 @@ struct CaptureItemPhotoView : View {
     var body: some View {
         if captureItemPhotoViewModel.showCamera {
             ZStack {
-                CameraView(cameraService: captureItemPhotoViewModel.cameraService) { result in
-                    switch result {
-                    case .success(let photo):
-                        if let data = photo.fileDataRepresentation() {
-                            captureItemPhotoViewModel.capturedImage = UIImage(data: data)
-                            captureItemPhotoViewModel.cameraService.stopSession()
-                            withAnimation {
-                                captureItemPhotoViewModel.showCamera.toggle()
-                            }
-                        } else {
-                            captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
+//                CameraView(cameraService: captureItemPhotoViewModel.cameraService) { result in
+//                    switch result {
+//                    case .success(let photo):
+//                        if let data = photo.fileDataRepresentation() {
+//                            captureItemPhotoViewModel.cropImage(data: data)
+//                        } else {
+//                            captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
+//                        }
+//                    case .failure(let error):
+//                        captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
+//                    }
+//                }
+                CameraBarcodeView(cameraBarcodeService: captureItemPhotoViewModel.cameraBarcodeService){ result in
+                    switch result{
+                    case .success(let Barcode):
+                        do {
+                            captureItemPhotoViewModel.capturedBarcode = Barcode
+                            captureItemPhotoViewModel.alertItem.show(title: "Found Barcode", message: Barcode, buttonTitle: "Got it!")
+
                         }
                     case .failure(let error):
                         captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
@@ -73,7 +82,8 @@ struct CaptureItemPhotoView : View {
             } message: {
                 captureItemPhotoViewModel.alertItem.message
             }
-        } else {
+        }
+        else {
             NavigationView {
                 VStack {
                     Spacer()
