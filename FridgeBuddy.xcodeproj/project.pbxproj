@@ -28,17 +28,20 @@
 		072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88A52888FA6F0016BC95 /* RecipesViewModel.swift */; };
 		072B88A82888FA8A0016BC95 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88A72888FA8A0016BC95 /* MoreView.swift */; };
 		072B88AA2888FA990016BC95 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88A92888FA990016BC95 /* MoreViewModel.swift */; };
+		073498BD28E53EAB00100069 /* AddInventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073498BC28E53EAB00100069 /* AddInventoryView.swift */; };
 		0787605B28982B8C00285CC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787605A28982B8C00285CC1 /* AppDelegate.swift */; };
 		0787606228986A1B00285CC1 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787606128986A1B00285CC1 /* CameraView.swift */; };
 		078760642898A11400285CC1 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760632898A11400285CC1 /* CameraService.swift */; };
 		078760662898D1AD00285CC1 /* CaptureItemPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */; };
 		078760682898DBD200285CC1 /* AddFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760672898DBD200285CC1 /* AddFormView.swift */; };
 		0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078760692898DF7800285CC1 /* AddFormViewModel.swift */; };
+		0789A69428E544AF006B0502 /* AddInventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0789A69328E544AF006B0502 /* AddInventoryViewModel.swift */; };
 		078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9C9288AEF2300BD5E7D /* LoginView.swift */; };
 		078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */; };
 		078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CD288B798200BD5E7D /* SignUpView.swift */; };
 		078FF9D0288B799000BD5E7D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */; };
 		07A25E3328C6D66E00DCAC28 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */; };
+		07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */; };
 		07F1D7B1288B9A0C00178430 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B0288B9A0B00178430 /* ButtonView.swift */; };
 		07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B2288B9C0700178430 /* TextFieldView.swift */; };
 		07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */; };
@@ -65,17 +68,20 @@
 		072B88A52888FA6F0016BC95 /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
 		072B88A72888FA8A0016BC95 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		072B88A92888FA990016BC95 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		073498BC28E53EAB00100069 /* AddInventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInventoryView.swift; sourceTree = "<group>"; };
 		0787605A28982B8C00285CC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0787606128986A1B00285CC1 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		078760632898A11400285CC1 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureItemPhotoView.swift; sourceTree = "<group>"; };
 		078760672898DBD200285CC1 /* AddFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormView.swift; sourceTree = "<group>"; };
 		078760692898DF7800285CC1 /* AddFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFormViewModel.swift; sourceTree = "<group>"; };
+		0789A69328E544AF006B0502 /* AddInventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInventoryViewModel.swift; sourceTree = "<group>"; };
 		078FF9C9288AEF2300BD5E7D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		078FF9CD288B798200BD5E7D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodState.swift; sourceTree = "<group>"; };
 		07F1D7B0288B9A0B00178430 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		07F1D7B2288B9C0700178430 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
@@ -166,6 +172,7 @@
 				0704B9CA288C5B9500E216D8 /* AlertItemView.swift */,
 				07202F26289F0D4500C68AC3 /* Item.swift */,
 				071B63BB28DBFCB5007B56AE /* Category.swift */,
+				07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +193,8 @@
 				072B88A12888FA2A0016BC95 /* AddViewModel.swift */,
 				078760672898DBD200285CC1 /* AddFormView.swift */,
 				078760692898DF7800285CC1 /* AddFormViewModel.swift */,
+				073498BC28E53EAB00100069 /* AddInventoryView.swift */,
+				0789A69328E544AF006B0502 /* AddInventoryViewModel.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -291,6 +300,8 @@
 			mainGroup = 072B886E2888D7940016BC95;
 			packageReferences = (
 				0704B9CC288C7CC600E216D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				07A0BF0928DFA6A30064C098 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+				07A0BF0C28DFAF860064C098 /* XCRemoteSwiftPackageReference "HalfASheet" */,
 			);
 			productRefGroup = 072B88782888D7940016BC95 /* Products */;
 			projectDirPath = "";
@@ -322,6 +333,7 @@
 				078FF9D0288B799000BD5E7D /* SignUpViewModel.swift in Sources */,
 				072B889E2888F9FE0016BC95 /* ItemsViewModel.swift in Sources */,
 				07F1D7B1288B9A0C00178430 /* ButtonView.swift in Sources */,
+				073498BD28E53EAB00100069 /* AddInventoryView.swift in Sources */,
 				078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */,
 				07202F27289F0D4500C68AC3 /* Item.swift in Sources */,
 				07202F25289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift in Sources */,
@@ -334,6 +346,7 @@
 				0704B9CB288C5B9500E216D8 /* AlertItemView.swift in Sources */,
 				072B88A22888FA2A0016BC95 /* AddViewModel.swift in Sources */,
 				072B88A02888FA1C0016BC95 /* AddView.swift in Sources */,
+				07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */,
 				078760682898DBD200285CC1 /* AddFormView.swift in Sources */,
 				078760642898A11400285CC1 /* CameraService.swift in Sources */,
 				078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */,
@@ -344,6 +357,7 @@
 				072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */,
 				078760662898D1AD00285CC1 /* CaptureItemPhotoView.swift in Sources */,
 				078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */,
+				0789A69428E544AF006B0502 /* AddInventoryViewModel.swift in Sources */,
 				072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */,
 				072B88932888DD0C0016BC95 /* LaunchViewModel.swift in Sources */,
 				072B889C2888F9E80016BC95 /* ItemsView.swift in Sources */,
@@ -560,6 +574,22 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				branch = master;
+				kind = branch;
+			};
+		};
+		07A0BF0928DFA6A30064C098 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		07A0BF0C28DFAF860064C098 /* XCRemoteSwiftPackageReference "HalfASheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/franklynw/HalfASheet";
+			requirement = {
+				branch = develop;
 				kind = branch;
 			};
 		};

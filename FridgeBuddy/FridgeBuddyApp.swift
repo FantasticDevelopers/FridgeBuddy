@@ -16,6 +16,7 @@ struct FridgeBuddyApp: App {
         WindowGroup {
             LaunchView()
                 .environmentObject(LaunchViewModel())
+                .environmentObject(ItemsViewModel())
         }
     }
 }

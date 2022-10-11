@@ -16,21 +16,25 @@ import SwiftUI
     func cropImage(data: Data) {
         let originalImage = UIImage(data: data)
         if let originalImage = originalImage {
-            let outputRect = cameraService.previewlayer.metadataOutputRectConverted(fromLayerRect: cameraService.previewlayer.bounds)
-            var cgImage = originalImage.cgImage!
-            let width = CGFloat(cgImage.width)
-            let height = CGFloat(cgImage.height)
-            let cropRect = CGRect(x: outputRect.origin.x * width, y: outputRect.origin.y * height, width: outputRect.size.width * width, height: outputRect.size.height * height)
-            
-            cgImage = cgImage.cropping(to: cropRect)!
-            let croppedUIImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: originalImage.imageOrientation)
-            self.capturedImage = croppedUIImage
-            cameraService.stopSession()
-            withAnimation {
-                showCamera.toggle()
+            let cgImage = originalImage.cgImage
+            if let cgImage = cgImage {
+                let outputRect = cameraService.previewlayer.metadataOutputRectConverted(fromLayerRect: cameraService.previewlayer.bounds)
+                let width = CGFloat(cgImage.width)
+                let height = CGFloat(cgImage.height)
+                let cropRect = CGRect(x: outputRect.origin.x * width, y: outputRect.origin.y * height, width: outputRect.size.width * width, height: outputRect.size.height * height)
+                
+                let croppedCgImage = cgImage.cropping(to: cropRect)
+                if let croppedCgImage = croppedCgImage {
+                    let croppedUIImage = UIImage(cgImage: croppedCgImage, scale: 1.0, orientation: originalImage.imageOrientation)
+                    self.capturedImage = croppedUIImage
+                    cameraService.stopSession()
+                    withAnimation {
+                        showCamera.toggle()
+                    }
+                    return
+                }
             }
-        } else {
-            alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
         }
+        alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
     }
 }

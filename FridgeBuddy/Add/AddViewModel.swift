@@ -15,6 +15,8 @@ import SwiftUI
     @Published var startOffset : CGFloat = 0
     @Published var titleOffset : CGFloat = 0
     @Published var titleBarHeight : CGFloat = 0
+    @Published var isAddingItem : Bool = false
+    var item : Item = Item()
     
     public func getOffset() -> CGSize {
         var size : CGSize = .zero

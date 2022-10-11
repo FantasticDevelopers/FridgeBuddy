@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 import FirebaseStorage
 
 @MainActor final class AddFormViewModel : ObservableObject {
@@ -15,12 +16,13 @@ import FirebaseStorage
     @Published var expiryDate : Date = Date()
     @Published var quantity : Int = 1
     
-    public func addNonBarcodeItem(completion: @escaping (Item?) -> Void) {
+    public func addNonBarcodeItem(completion: @escaping (Result<Item, Error>) -> Void) {
         let storageRef = Storage.storage().reference()
         let imageData = item.image!.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
-            alertItem.show(title: "Please try again!", message: "Image cannot be added.", buttonTitle: "Got it!")
+            let error : Error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Image cannot be added."])
+            completion(.failure(error))
             return
         }
         
@@ -28,11 +30,12 @@ import FirebaseStorage
         let fileRef = storageRef.child(item.imageReference)
         
         fileRef.putData(imageData!, metadata: nil) { [self] metaData, error in
-            guard error == nil && metaData != nil else {
-                alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+            guard error == nil else {
+                completion(.failure(error!))
                 return
             }
             
+            item.expiryDate = expiryDate
             calculateExpiryDays()
             
             let db = Firestore.firestore()
@@ -42,21 +45,38 @@ import FirebaseStorage
             document.setData([
                 "name": item.name,
                 "brand": item.brand,
-                "category": item.category,
+                "category": item.category.rawValue,
                 "expiryDays": item.expiryDays!,
                 "imageReference": item.imageReference,
                 "isBarcodeItem": item.isBarcodeItem
             ]) { error in
                 guard error == nil else {
-                    self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                    completion(.failure(error!))
                     return
                 }
                 
                 let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
                 item.image = self.item.image
                 item.expiryDays = self.item.expiryDays
+                item.state = FoodState.fresh
+                item.quantity = self.quantity
+                item.expiryDate = self.expiryDate
                 
-                completion(item)
+                let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
+                
+                document.setData([
+                    "itemId" : item.id,
+                    "quantity": item.quantity!,
+                    "expiryDate": item.expiryDate!,
+                    "state": item.state!.rawValue,
+                    "creationDate": Date()
+                ]) { error in
+                    guard error == nil else {
+                        completion(.failure(error!))
+                        return
+                    }
+                    completion(.success(item))
+                }
             }
         }
     }

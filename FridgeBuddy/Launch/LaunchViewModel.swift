@@ -13,6 +13,7 @@ import FirebaseAuth
 @MainActor final class LaunchViewModel : ObservableObject {
     @Published var isLogin : Bool = false
     @Published var items : [Item] = []
+    @Published var alertItem = AlertItemView()
     
     func checkLogin(firstCheck : Bool = false) {
         if firstCheck {
@@ -24,17 +25,18 @@ import FirebaseAuth
         }
     }
     
-    func loadItems() {
+    func loadItems(completion: @escaping (Result<[Item], Error>) -> Void) {
         let db = Firestore.firestore()
         
         db.collection("items").getDocuments { [self] snapshot, error in
             guard error == nil else {
+                completion(.failure(error!))
                 return
             }
             
             if let snapshot = snapshot {
                 let items : [Item] = snapshot.documents.map { itemData in
-                    let item = Item(id: itemData.documentID, name: itemData["name"] as? String ?? "", brand: itemData["brand"] as? String ?? "", category: itemData["category"] as? String ?? "", imageReference: itemData["imageReference"] as? String ?? "", isBarcodeItem: itemData["isBarcodeItem"] as? Bool ?? false)
+                    let item = Item(id: itemData.documentID, name: itemData["name"] as? String ?? "", brand: itemData["brand"] as? String ?? "", category: Categories.get(at: itemData["category"] as? Int ?? 0), imageReference: itemData["imageReference"] as? String ?? "", isBarcodeItem: itemData["isBarcodeItem"] as? Bool ?? false)
                     
                     
                     if let expiryDays = itemData["expiryDays"] as? Int {
@@ -58,12 +60,17 @@ import FirebaseAuth
                     let fileRef = storageRef.child(item.imageReference)
                     fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
                         guard error == nil && data != nil else {
+                            completion(.failure(error!))
                             return
                         }
                         count += 1
                         items[index].image = UIImage(data: data!)
                         DispatchQueue.main.async {
                                 self.items = items
+                        }
+                        
+                        if count == items.count {
+                            completion(.success(items))
                         }
                     }
                 }

@@ -93,7 +93,7 @@ struct AddView: View {
                                 Image(uiImage: item.image!)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: 70)
+                                    .frame(height: 50)
                                     .cornerRadius(10)
                             }
                             else {
@@ -110,13 +110,14 @@ struct AddView: View {
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5)
     
-                                Text(item.category)
+                                Text(item.category.value)
                                     .font(.subheadline)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Button {
-                                
+                                addViewModel.item = item
+                                addViewModel.isAddingItem.toggle()
                             } label: {
                                 Image(systemName: "bag.fill.badge.plus")
                                     .padding()
@@ -151,6 +152,14 @@ struct AddView: View {
         .fullScreenCover(isPresented: $addViewModel.showCamera) {
                         CaptureItemPhotoView(addViewModel: addViewModel)
         }
+        .sheet(isPresented: $addViewModel.isAddingItem) {
+            if #available(iOS 16.0, *) {
+                AddInventoryView(item: addViewModel.item)
+                    .presentationDetents([.medium])
+            } else {
+                AddInventoryView(item: addViewModel.item)
+            }
+        }
     }
 }
 
@@ -161,4 +170,3 @@ struct AddView_Previews: PreviewProvider {
             .previewInterfaceOrientation(.portrait)
     }
 }
-  

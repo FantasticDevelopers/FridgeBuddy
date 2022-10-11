@@ -48,7 +48,9 @@ struct CaptureItemPhotoView : View {
                     
                     Spacer()
                     Text("Capture the photo of food item")
+                        .foregroundColor(.accentColor)
                         .padding(.bottom)
+                    
                     Button {
                         captureItemPhotoViewModel.cameraService.capturePhoto()
                     } label: {
@@ -73,7 +75,10 @@ struct CaptureItemPhotoView : View {
         } else {
             NavigationView {
                 VStack {
+                    Text("Public Photo")
+                    
                     Spacer()
+                    
                     Image(uiImage: captureItemPhotoViewModel.capturedImage!)
                         .resizable()
                         .cornerRadius(10)
@@ -91,12 +96,10 @@ struct CaptureItemPhotoView : View {
                         Spacer()
                        
                         Button {
-                            DispatchQueue.global(qos: .background).async {
-                                captureItemPhotoViewModel.cameraService.startSession()
-                                DispatchQueue.main.async {
-                                    withAnimation {
-                                        captureItemPhotoViewModel.showCamera.toggle()
-                                    }
+                            captureItemPhotoViewModel.cameraService.startSession()
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    captureItemPhotoViewModel.showCamera.toggle()
                                 }
                             }
                         } label: {
@@ -115,11 +118,6 @@ struct CaptureItemPhotoView : View {
                                 .frame(width: 30, height: 20)
                                 .foregroundColor(Color.green)
                         }
-                        
-                    }
-                    
-                    ToolbarItem(placement: .principal) {
-                        Text("Public Photo")
                         
                     }
                 }
