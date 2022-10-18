@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CaptureItemPhotoView : View {
     @StateObject var captureItemPhotoViewModel = CaptureItemPhotoViewModel()
-    @ObservedObject var addViewModel : AddViewModel
         
     @Environment(\.presentationMode) private var presentationMode
     
@@ -88,7 +87,7 @@ struct CaptureItemPhotoView : View {
                     Spacer()
                     
                     HStack {
-                        NavigationLink(destination: AddFormView(addViewModel: addViewModel ,capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
+                        NavigationLink(destination: AddFormView(capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
                             ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
                                 .padding(.leading)
                         }
@@ -128,7 +127,7 @@ struct CaptureItemPhotoView : View {
 
 struct CaptureItemPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        CaptureItemPhotoView(addViewModel: AddViewModel())
+        CaptureItemPhotoView()
     }
 }
 

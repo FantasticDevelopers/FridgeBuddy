@@ -62,6 +62,9 @@ struct AddInventoryView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            addInventoryViewModel.expiryDate = Calendar.current.date(byAdding: .day, value: item.expiryDays!, to: Date())!
+        }
     }
 }
 

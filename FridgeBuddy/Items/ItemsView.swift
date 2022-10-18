@@ -13,7 +13,9 @@ struct ItemsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Picker(selection: $itemsViewModel.selectedState.onChange(itemsViewModel.setSections)) {
+                Picker(selection: $itemsViewModel.selectedState.onChange {
+                    itemsViewModel.setSections()
+                }) {
                     ForEach(FoodState.allCases, id: \.self) { state in
                         Text(state.value)
                     }
@@ -24,7 +26,7 @@ struct ItemsView: View {
                 .padding(.horizontal)
                 .padding(.top)
                 
-                ScrollView {
+                ScrollView(.vertical, showsIndicators: false) {
                     let gridItem = GridItem(.fixed(190))
                     LazyVGrid(columns: [gridItem, gridItem], alignment: .center) {
                         ForEach(Categories.allCases, id: \.self) { category in
@@ -78,7 +80,18 @@ struct ItemsView: View {
                     }
                 }
             }
+            .searchable(text: $itemsViewModel.searchText.onChange {
+                itemsViewModel.setSections()
+            }, prompt: "Search for an item")
             .navigationTitle("Your Items")
+        }
+        .sheet(isPresented: $itemsViewModel.showDetails) {
+            if #available(iOS 16.0, *) {
+                ItemsDetailView(item: itemsViewModel.item)
+                    .presentationDetents([.fraction(0.75)])
+            } else {
+                ItemsDetailView(item: itemsViewModel.item)
+            }
         }
         .alert(itemsViewModel.alertItem.title, isPresented: $itemsViewModel.alertItem.showAlert) {
             Button(itemsViewModel.alertItem.buttonTitle) {}
@@ -100,7 +113,7 @@ struct ItemSection : View {
     
     var body: some View {
         Section {
-            ForEach(itemsViewModel.selectedState == .fresh ? itemsViewModel.freshItems : (itemsViewModel.selectedState == .stale ? itemsViewModel.staleItems : itemsViewModel.expiredItems)) { item in
+            ForEach(itemsViewModel.filteredItems) { item in
                 if (item as Item).category == category {
                     VStack {
                         Image(uiImage: item.image!)
@@ -119,26 +132,18 @@ struct ItemSection : View {
                     .padding()
                     .background(.red.opacity(0.3))
                     .cornerRadius(10)
+                    .onTapGesture {
+                        itemsViewModel.item = item
+                        itemsViewModel.showDetails.toggle()
+                    }
                 }
             }
         } header: {
             Text(category.value)
-                .font(.largeTitle)
+                .font(.title2)
                 .foregroundColor(Color.accentColor)
                 .padding(.top, 30)
         }
         .padding(.horizontal, 2)
-    }
-}
-
-extension Binding {
-    func onChange(_ handler: @escaping (Value) -> ()) -> Binding<Value> {
-        Binding(
-            get: { self.wrappedValue },
-            set: { newValue in
-                self.wrappedValue = newValue
-                handler(newValue)
-            }
-        )
     }
 }

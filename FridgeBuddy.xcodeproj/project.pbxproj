@@ -40,12 +40,13 @@
 		078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */; };
 		078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CD288B798200BD5E7D /* SignUpView.swift */; };
 		078FF9D0288B799000BD5E7D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */; };
-		07A25E3328C6D66E00DCAC28 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */; };
 		07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */; };
 		07F1D7B1288B9A0C00178430 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B0288B9A0B00178430 /* ButtonView.swift */; };
 		07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B2288B9C0700178430 /* TextFieldView.swift */; };
 		07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */; };
 		07F1D7B7288BA37C00178430 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B6288BA37C00178430 /* IconView.swift */; };
+		07F6533B28FB450B0082CDF7 /* ItemsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6533A28FB450B0082CDF7 /* ItemsDetailView.swift */; };
+		07F6533D28FB451B0082CDF7 /* ItemsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6533C28FB451B0082CDF7 /* ItemsDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,12 +81,13 @@
 		078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		078FF9CD288B798200BD5E7D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodState.swift; sourceTree = "<group>"; };
 		07F1D7B0288B9A0B00178430 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		07F1D7B2288B9C0700178430 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B6288BA37C00178430 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		07F6533A28FB450B0082CDF7 /* ItemsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDetailView.swift; sourceTree = "<group>"; };
+		07F6533C28FB451B0082CDF7 /* ItemsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,8 @@
 			children = (
 				072B889B2888F9E80016BC95 /* ItemsView.swift */,
 				072B889D2888F9FE0016BC95 /* ItemsViewModel.swift */,
+				07F6533A28FB450B0082CDF7 /* ItemsDetailView.swift */,
+				07F6533C28FB451B0082CDF7 /* ItemsDetailViewModel.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -244,7 +248,6 @@
 				07F1D7B2288B9C0700178430 /* TextFieldView.swift */,
 				07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */,
 				07F1D7B6288BA37C00178430 /* IconView.swift */,
-				07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				072B889E2888F9FE0016BC95 /* ItemsViewModel.swift in Sources */,
 				07F1D7B1288B9A0C00178430 /* ButtonView.swift in Sources */,
 				073498BD28E53EAB00100069 /* AddInventoryView.swift in Sources */,
+				07F6533B28FB450B0082CDF7 /* ItemsDetailView.swift in Sources */,
 				078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */,
 				07202F27289F0D4500C68AC3 /* Item.swift in Sources */,
 				07202F25289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift in Sources */,
@@ -347,11 +351,11 @@
 				072B88A22888FA2A0016BC95 /* AddViewModel.swift in Sources */,
 				072B88A02888FA1C0016BC95 /* AddView.swift in Sources */,
 				07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */,
+				07F6533D28FB451B0082CDF7 /* ItemsDetailViewModel.swift in Sources */,
 				078760682898DBD200285CC1 /* AddFormView.swift in Sources */,
 				078760642898A11400285CC1 /* CameraService.swift in Sources */,
 				078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */,
 				07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */,
-				07A25E3328C6D66E00DCAC28 /* SearchBarView.swift in Sources */,
 				0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */,
 				07F1D7B7288BA37C00178430 /* IconView.swift in Sources */,
 				072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */,
@@ -506,7 +510,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBudd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -537,7 +541,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBudd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

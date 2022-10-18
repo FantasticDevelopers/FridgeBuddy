@@ -10,6 +10,7 @@ import SwiftUI
 
 class Item : Identifiable {
     let id : String
+    var userItemId : String?
     var name : String
     var brand : String
     var category : Categories
