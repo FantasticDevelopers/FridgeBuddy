@@ -10,77 +10,102 @@ import SwiftUI
 struct AddFormView: View {
     @StateObject var addFormViewModel = AddFormViewModel()
     @ObservedObject var addViewModel : AddViewModel
+    @EnvironmentObject var launchViewModel : LaunchViewModel
     
     var capturedPhoto : UIImage
     
     @Environment(\.presentationMode) private var presentationMode
         
     var body: some View {
-        VStack {
-            Text("Add Item")
-                .foregroundColor(Color.green)
-                .font(.largeTitle)
-            
-            Image(uiImage: capturedPhoto)
-                .resizable()
-                .frame(width: 200, height: 200)
-                .padding(.bottom)
-            
-            Group {
-                TextFieldView(text: "Name", value: $addFormViewModel.item.name)
+        ScrollView {
+            VStack {
+                Text("Add Item")
+                    .foregroundColor(Color.green)
+                    .font(.largeTitle)
                 
-                TextFieldView(text: "Brand", value: $addFormViewModel.item.brand)
+                Image(uiImage: capturedPhoto)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+                    .cornerRadius(10)
+                    .padding(.bottom)
                 
-                TextFieldView(text: "Category", value: $addFormViewModel.item.category)
-                
-                DatePicker("Expiry Date", selection: $addFormViewModel.expiryDate, in: Date()..., displayedComponents: .date)
+                Group {
+                    TextFieldView(text: "Name", value: $addFormViewModel.item.name)
+                    
+                    TextFieldView(text: "Brand", value: $addFormViewModel.item.brand)
+                    
+                    HStack {
+                        Text("Category")
+                        
+                        Spacer()
+                        
+                        Picker(selection: $addFormViewModel.item.category) {
+                            ForEach(Categories.allCases, id: \.self) { category in
+                                Text(category.value)
+                            }
+                        } label: {
+                            Text("Category")
+                        }
+                    }
                     .padding(.vertical, 5.0)
                     .padding(.horizontal)
                     .background(RoundedRectangle(cornerRadius: 4)
                         .stroke( Color.black.opacity(0.7), lineWidth: 2))
                     .padding(.bottom)
+                    
+                    Stepper("Quantity: \(addFormViewModel.quantity)", value: $addFormViewModel.quantity, in: 1...1000)
+                        .padding(.vertical, 5.0)
+                        .padding(.horizontal)
+                        .background(RoundedRectangle(cornerRadius: 4)
+                            .stroke( Color.black.opacity(0.7), lineWidth: 2))
+                        .padding(.bottom)
+                    
+                    DatePicker("Expiry Date", selection: $addFormViewModel.expiryDate, displayedComponents: .date)
+                        .padding(.vertical, 5.0)
+                        .padding(.horizontal)
+                        .background(RoundedRectangle(cornerRadius: 4)
+                            .stroke( Color.black.opacity(0.7), lineWidth: 2))
+                        .padding(.bottom)
+                }
                 
-                Stepper("Quantity: \(addFormViewModel.quantity)", value: $addFormViewModel.quantity, in: 1...1000)
-                    .padding(.vertical, 5.0)
-                    .padding(.horizontal)
-                    .background(RoundedRectangle(cornerRadius: 4)
-                        .stroke( Color.black.opacity(0.7), lineWidth: 2))
-                    .padding(.bottom)
+                Button {
+                    addFormViewModel.item.image = capturedPhoto
+                    addFormViewModel.addNonBarcodeItem { (result) in
+                        switch result {
+                        case .success(let item):
+                            launchViewModel.items.append(item)
+                        case .failure(let error):
+                            addFormViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
+                        }
+                    }
+                    addViewModel.showCamera.toggle()
+                } label: {
+                    ButtonView(buttonText: "Add Item", symbol: "plus.circle.fill")
+                }
+                
+                Spacer()
             }
-            
-            Button {
-                addFormViewModel.item.image = capturedPhoto
-                addFormViewModel.addNonBarcodeItem { item in
-                    if let item = item {
-                        addViewModel.items.append(item)
+            .padding()
+            .offset(y: -60)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Image(systemName: "arrowshape.turn.up.backward.fill")
+                            .resizable()
+                            .frame(width: 30, height: 20)
+                            .foregroundColor(Color.green)
                     }
                 }
-                addViewModel.showCamera.toggle()
-            } label: {
-                ButtonView(buttonText: "Add Item", symbol: "plus.circle.fill")
             }
-            
-            Spacer()
-        }
-        .padding()
-        .offset(y: -60)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarLeading) {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Image(systemName: "arrowshape.turn.up.backward.fill")
-                        .resizable()
-                        .frame(width: 30, height: 20)
-                        .foregroundColor(Color.green)
-                }
+            .alert(addFormViewModel.alertItem.title, isPresented: $addFormViewModel.alertItem.showAlert) {
+                Button(addFormViewModel.alertItem.buttonTitle) {}
+            } message: {
+                addFormViewModel.alertItem.message
             }
-        }
-        .alert(addFormViewModel.alertItem.title, isPresented: $addFormViewModel.alertItem.showAlert) {
-            Button(addFormViewModel.alertItem.buttonTitle) {}
-        } message: {
-            addFormViewModel.alertItem.message
         }
     }
 }

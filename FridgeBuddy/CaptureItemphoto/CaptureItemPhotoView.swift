@@ -17,25 +17,12 @@ struct CaptureItemPhotoView : View {
     var body: some View {
         if captureItemPhotoViewModel.showCamera {
             ZStack {
-//                CameraView(cameraService: captureItemPhotoViewModel.cameraService) { result in
-//                    switch result {
-//                    case .success(let photo):
-//                        if let data = photo.fileDataRepresentation() {
-//                            captureItemPhotoViewModel.cropImage(data: data)
-//                        } else {
-//                            captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
-//                        }
-//                    case .failure(let error):
-//                        captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
-//                    }
-//                }
                 CameraBarcodeView(cameraBarcodeService: captureItemPhotoViewModel.cameraBarcodeService){ result in
                     switch result{
                     case .success(let Barcode):
                         do {
                             captureItemPhotoViewModel.capturedBarcode = Barcode
                             captureItemPhotoViewModel.alertItem.show(title: "Found Barcode", message: Barcode, buttonTitle: "Got it!")
-
                         }
                     case .failure(let error):
                         captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
@@ -47,6 +34,7 @@ struct CaptureItemPhotoView : View {
                     HStack {
                         Button {
                             presentationMode.wrappedValue.dismiss()
+                            captureItemPhotoViewModel.cameraService.stopSession()
                         } label: {
                              Image(systemName: "xmark")
                                 .resizable()
@@ -60,7 +48,9 @@ struct CaptureItemPhotoView : View {
                     
                     Spacer()
                     Text("Capture the photo of food item")
+                        .foregroundColor(.accentColor)
                         .padding(.bottom)
+                    
                     Button {
                         captureItemPhotoViewModel.cameraService.capturePhoto()
                     } label: {
@@ -86,10 +76,14 @@ struct CaptureItemPhotoView : View {
         else {
             NavigationView {
                 VStack {
+                    Text("Public Photo")
+                    
                     Spacer()
+                    
                     Image(uiImage: captureItemPhotoViewModel.capturedImage!)
                         .resizable()
-                        .frame(width: 300, height: 300)
+                        .cornerRadius(10)
+                        .frame(width: captureItemPhotoViewModel.cameraService.previewlayer.frame.width, height: captureItemPhotoViewModel.cameraService.previewlayer.frame.height)
                     
                     Spacer()
                     Spacer()
@@ -103,12 +97,10 @@ struct CaptureItemPhotoView : View {
                         Spacer()
                        
                         Button {
-                            DispatchQueue.global(qos: .background).async {
-                                captureItemPhotoViewModel.cameraService.startSession()
-                                DispatchQueue.main.async {
-                                    withAnimation {
-                                        captureItemPhotoViewModel.showCamera.toggle()
-                                    }
+                            captureItemPhotoViewModel.cameraService.startSession()
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    captureItemPhotoViewModel.showCamera.toggle()
                                 }
                             }
                         } label: {
@@ -127,11 +119,6 @@ struct CaptureItemPhotoView : View {
                                 .frame(width: 30, height: 20)
                                 .foregroundColor(Color.green)
                         }
-                        
-                    }
-                    
-                    ToolbarItem(placement: .principal) {
-                        Text("Public Photo")
                         
                     }
                 }

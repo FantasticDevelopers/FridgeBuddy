@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddView: View {
     @StateObject var addViewModel = AddViewModel()
+    @EnvironmentObject var launchViewModel : LaunchViewModel
     
     @Environment(\.colorScheme) var scheme
     
@@ -85,14 +86,14 @@ struct AddView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(addViewModel.isEditing ? addViewModel.items.filter{$0.name.lowercased().contains(addViewModel.searchText.lowercased())} : addViewModel.items) { item in
+                    ForEach(addViewModel.isEditing ? launchViewModel.items.filter{$0.name.lowercased().contains(addViewModel.searchText.lowercased())} : launchViewModel.items) { item in
                         HStack{
                             
                             if item.image != nil {
                                 Image(uiImage: item.image!)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: 70)
+                                    .frame(height: 50)
                                     .cornerRadius(10)
                             }
                             else {
@@ -109,13 +110,14 @@ struct AddView: View {
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5)
     
-                                Text(item.category)
+                                Text(item.category.value)
                                     .font(.subheadline)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Button {
-                                
+                                addViewModel.item = item
+                                addViewModel.isAddingItem.toggle()
                             } label: {
                                 Image(systemName: "bag.fill.badge.plus")
                                     .padding()
@@ -150,9 +152,12 @@ struct AddView: View {
         .fullScreenCover(isPresented: $addViewModel.showCamera) {
                         CaptureItemPhotoView(addViewModel: addViewModel)
         }
-        .onAppear {
-            if addViewModel.items.isEmpty {
-                addViewModel.loadItems()
+        .sheet(isPresented: $addViewModel.isAddingItem) {
+            if #available(iOS 16.0, *) {
+                AddInventoryView(item: addViewModel.item)
+                    .presentationDetents([.medium])
+            } else {
+                AddInventoryView(item: addViewModel.item)
             }
         }
     }
@@ -165,4 +170,3 @@ struct AddView_Previews: PreviewProvider {
             .previewInterfaceOrientation(.portrait)
     }
 }
-  

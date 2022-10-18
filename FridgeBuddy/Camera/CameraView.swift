@@ -29,8 +29,10 @@ struct CameraView: UIViewControllerRepresentable {
         
         let viewController = UIViewController()
         viewController.view.backgroundColor = .black
+        cameraService.previewlayer.frame = CGRect(x: viewController.view.bounds.minX, y: viewController.view.bounds.minY + viewController.view.bounds.maxY / 4, width: viewController.view.bounds.width, height: viewController.view.bounds.height / 3)
+        cameraService.previewlayer.frame = cameraService.previewlayer.frame.inset(by: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
+        cameraService.previewlayer.cornerRadius = 10
         viewController.view.layer.addSublayer(cameraService.previewlayer)
-        cameraService.previewlayer.frame = viewController.view.bounds
         return viewController
     }
     

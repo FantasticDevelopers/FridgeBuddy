@@ -14,9 +14,8 @@ import SwiftUI
     @Published var showCamera : Bool = true
     @Published var alertItem = AlertItemView()
     @Published var capturedImage : UIImage?
-
     @Published var capturedBarcode : String?
-    
+
     func cropImage(data: Data) {
         let originalImage = UIImage(data: data)
         if let originalImage = originalImage {

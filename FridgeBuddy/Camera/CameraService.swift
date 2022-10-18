@@ -69,7 +69,9 @@ class CameraService {
     
     func startSession() {
         if !session.isRunning {
-            session.startRunning()
+            DispatchQueue.global(qos: .background).async {
+                self.session.startRunning()
+            }
         }
     }
     

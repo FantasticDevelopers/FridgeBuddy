@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LaunchView: View {
     @EnvironmentObject var launchViewModel : LaunchViewModel
+    @EnvironmentObject var itemsViewModel : ItemsViewModel
     
     var body: some View {
         if launchViewModel.isLogin {
@@ -33,6 +34,23 @@ struct LaunchView: View {
                         Image(systemName: "ellipsis.circle.fill")
                         Text("More")
                     }
+            }
+            .onAppear {
+                if launchViewModel.items.isEmpty {
+                    launchViewModel.loadItems { result in
+                        switch result {
+                        case .success(let items):
+                            itemsViewModel.setUserItems(items: items)
+                        case .failure(let error):
+                            launchViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
+                        }
+                    }
+                }
+            }
+            .alert(launchViewModel.alertItem.title, isPresented: $launchViewModel.alertItem.showAlert) {
+                Button(launchViewModel.alertItem.buttonTitle) {}
+            } message: {
+                launchViewModel.alertItem.message
             }
         }
         else {
