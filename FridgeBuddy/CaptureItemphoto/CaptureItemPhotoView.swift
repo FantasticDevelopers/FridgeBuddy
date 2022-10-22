@@ -11,7 +11,7 @@ import SwiftUI
 struct CaptureItemPhotoView : View {
     @StateObject var captureItemPhotoViewModel = CaptureItemPhotoViewModel()
     @ObservedObject var addViewModel : AddViewModel
-        
+    
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
@@ -21,8 +21,10 @@ struct CaptureItemPhotoView : View {
                     switch result{
                     case .success(let Barcode):
                         do {
-                            captureItemPhotoViewModel.capturedBarcode = Barcode
-                            captureItemPhotoViewModel.alertItem.show(title: "Found Barcode", message: Barcode, buttonTitle: "Got it!")
+                            captureItemPhotoViewModel.upc = Barcode
+                            captureItemPhotoViewModel.cameraService.stopSession()
+                            captureItemPhotoViewModel.showCamera.toggle()
+                            
                         }
                     case .failure(let error):
                         captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
@@ -76,38 +78,41 @@ struct CaptureItemPhotoView : View {
         else {
             NavigationView {
                 VStack {
-                    Text("Public Photo")
-                    
-                    Spacer()
-                    
-                    Image(uiImage: captureItemPhotoViewModel.capturedImage!)
-                        .resizable()
-                        .cornerRadius(10)
-                        .frame(width: captureItemPhotoViewModel.cameraService.previewlayer.frame.width, height: captureItemPhotoViewModel.cameraService.previewlayer.frame.height)
-                    
-                    Spacer()
-                    Spacer()
-                    
-                    HStack {
-                        NavigationLink(destination: AddFormView(addViewModel: addViewModel ,capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
-                            ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
-                                .padding(.leading)
-                        }
-                        
-                        Spacer()
-                       
-                        Button {
-                            captureItemPhotoViewModel.cameraService.startSession()
-                            DispatchQueue.main.async {
-                                withAnimation {
-                                    captureItemPhotoViewModel.showCamera.toggle()
-                                }
-                            }
-                        } label: {
-                            ButtonView(buttonText: "Retake", width: 150, symbol: "camera.circle.fill")
-                                .padding(.trailing)
-                        }
+                    Text("Brand - \(captureItemPhotoViewModel.barcodeItem.nix_brand_name) \n \(captureItemPhotoViewModel.barcodeItem.nix_item_name)")
+                        .task{
+                            await captureItemPhotoViewModel.getData()
                     }
+                    
+                    Spacer()
+                    
+//                    Image(uiImage: captureItemPhotoViewModel.capturedImage!)
+//                        .resizable()
+//                        .cornerRadius(10)
+//                        .frame(width: captureItemPhotoViewModel.cameraService.previewlayer.frame.width, height: captureItemPhotoViewModel.cameraService.previewlayer.frame.height)
+//
+//                    Spacer()
+//                    Spacer()
+                    
+//                    HStack {
+//                        NavigationLink(destination: AddFormView(addViewModel: addViewModel ,capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
+//                            ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
+//                                .padding(.leading)
+//                        }
+                        
+//                        Spacer()
+                       
+//                        Button {
+//                            captureItemPhotoViewModel.cameraService.startSession()
+//                            DispatchQueue.main.async {
+//                                withAnimation {
+//                                    captureItemPhotoViewModel.showCamera.toggle()
+//                                }
+//                            }
+//                        } label: {
+//                            ButtonView(buttonText: "Retake", width: 150, symbol: "camera.circle.fill")
+//                                .padding(.trailing)
+//                        }
+//                    }
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {

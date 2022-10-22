@@ -16,6 +16,7 @@ import SwiftUI
     @Published var titleOffset : CGFloat = 0
     @Published var titleBarHeight : CGFloat = 0
     @Published var isAddingItem : Bool = false
+    //var barcodeItem : BarCodeItem = BarCodeItem()
     var item : Item = Item()
     
     public func getOffset() -> CGSize {

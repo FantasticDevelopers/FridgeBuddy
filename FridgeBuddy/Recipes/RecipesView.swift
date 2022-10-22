@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct RecipesView: View {
+    
     var body: some View {
-        Text("Recipes View")
+        Text("Rceipes View")
     }
 }
 

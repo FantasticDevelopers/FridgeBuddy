@@ -10,7 +10,6 @@ import AVFoundation
 
 struct CameraBarcodeView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController
-    
     //define the camera service reference
     let cameraBarcodeService : CameraBarcodeService
     //define the Metadata Processing func
@@ -55,19 +54,19 @@ struct CameraBarcodeView: UIViewControllerRepresentable {
             
             if let metadataObject = metadataObjects.first {
                 guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-                guard let stringValue = readableObject.stringValue else { return }
+                guard let stringBarCode = readableObject.stringValue else { return }
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
                 parent.cameraBarcodeService.stopSession()
-                found(code: stringValue)
-                didfinishProcessingMetadata(.success(stringValue))
+                found(barcode: stringBarCode)
+                didfinishProcessingMetadata(.success(stringBarCode))
             }
             else{
                 didfinishProcessingMetadata(.failure(NSCoderValueNotFoundError as! Error))
             }
         }
         
-        func found(code: String) {
-                print(code)
+        func found(barcode: String) {
+                print(barcode)
             }
     }
     

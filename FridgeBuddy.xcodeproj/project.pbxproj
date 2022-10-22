@@ -46,6 +46,7 @@
 		07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B2288B9C0700178430 /* TextFieldView.swift */; };
 		07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */; };
 		07F1D7B7288BA37C00178430 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B6288BA37C00178430 /* IconView.swift */; };
+		8610AAAF28FE60E900D6EED9 /* BarCodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */; };
 		86CBBBE028E0FEF9004494E1 /* CameraBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */; };
 		86CBBBE228E10ACF004494E1 /* CameraBarcodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		07F1D7B2288B9C0700178430 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B6288BA37C00178430 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeItem.swift; sourceTree = "<group>"; };
 		86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeView.swift; sourceTree = "<group>"; };
 		86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +179,7 @@
 				07202F26289F0D4500C68AC3 /* Item.swift */,
 				071B63BB28DBFCB5007B56AE /* Category.swift */,
 				07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */,
+				8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */,
 				0789A69428E544AF006B0502 /* AddInventoryViewModel.swift in Sources */,
 				072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */,
+				8610AAAF28FE60E900D6EED9 /* BarCodeItem.swift in Sources */,
 				072B88932888DD0C0016BC95 /* LaunchViewModel.swift in Sources */,
 				072B889C2888F9E80016BC95 /* ItemsView.swift in Sources */,
 				072B88A82888FA8A0016BC95 /* MoreView.swift in Sources */,
