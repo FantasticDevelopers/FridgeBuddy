@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LaunchView: View {
     @EnvironmentObject var launchViewModel : LaunchViewModel
+    @EnvironmentObject var addViewModel : AddViewModel
     @EnvironmentObject var itemsViewModel : ItemsViewModel
     
     var body: some View {
@@ -36,8 +37,8 @@ struct LaunchView: View {
                     }
             }
             .onAppear {
-                if launchViewModel.items.isEmpty {
-                    launchViewModel.loadItems { result in
+                if addViewModel.items.isEmpty {
+                    addViewModel.loadItems { result in
                         switch result {
                         case .success(let items):
                             itemsViewModel.setUserItems(items: items)
@@ -65,5 +66,17 @@ struct LaunchView: View {
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchView()
+    }
+}
+
+extension Binding {
+    func onChange(_ handler: @escaping () -> ()) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler()
+            }
+        )
     }
 }

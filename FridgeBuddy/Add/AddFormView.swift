@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AddFormView: View {
     @StateObject var addFormViewModel = AddFormViewModel()
-    @ObservedObject var addViewModel : AddViewModel
-    @EnvironmentObject var launchViewModel : LaunchViewModel
+    @EnvironmentObject var addViewModel : AddViewModel
+    @EnvironmentObject var itemsViewModel : ItemsViewModel
     
     var capturedPhoto : UIImage
     
@@ -73,8 +73,10 @@ struct AddFormView: View {
                     addFormViewModel.item.image = capturedPhoto
                     addFormViewModel.addNonBarcodeItem { (result) in
                         switch result {
-                        case .success(let item):
-                            launchViewModel.items.append(item)
+                        case .success(let items):
+                            addViewModel.items.append(items[0])
+                            itemsViewModel.items.append(items[1])
+                            itemsViewModel.setSections()
                         case .failure(let error):
                             addFormViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                         }
@@ -114,6 +116,6 @@ struct AddFormView_Previews: PreviewProvider {
    static var capturedPhoto : UIImage = UIImage(imageLiteralResourceName: "LoginIcon")
     
     static var previews: some View {
-        AddFormView(addViewModel: AddViewModel(), capturedPhoto: capturedPhoto)
+        AddFormView(capturedPhoto: capturedPhoto)
     }
 }

@@ -10,10 +10,22 @@ import Firebase
 import FirebaseAuth
 
 @MainActor final class ItemsViewModel : ObservableObject {
-    var items : [Item] = []
-    @Published var freshItems : [Item] = []
-    @Published var staleItems : [Item] = []
-    @Published var expiredItems : [Item] = []
+    @Published var items : [Item] = []
+    @Published var selectedState : FoodState = .fresh
+    var filteredItems : [Item] {
+        if searchText == "" {
+            var selectedItems : [Item] = []
+            selectedItems =  items.filter { $0.state == selectedState }
+            return selectedItems
+        } else {
+            var selectedItems : [Item] = []
+            selectedItems =  items.filter { $0.state == selectedState }
+            selectedItems = selectedItems.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            return selectedItems
+        }
+    }
+    
+    @Published var searchText : String = ""
     @Published var alertItem = AlertItemView()
     @Published var vegetablesSection : Bool = false
     @Published var fruitsSection : Bool = false
@@ -26,13 +38,16 @@ import FirebaseAuth
     @Published var herbsSection : Bool = false
     @Published var oilSection : Bool = false
     @Published var processedSection : Bool = false
-    @Published var selectedState : FoodState = .fresh
+    @Published var showDetails : Bool = false
+    
+    var item : Item = Item()
     
     func setUserItems(items : [Item]) {
         let db = Firestore.firestore()
         
         db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").getDocuments { snapshot, error in
             guard error == nil else {
+                self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
                 return
             }
             
@@ -40,17 +55,21 @@ import FirebaseAuth
                 DispatchQueue.main.async { [self] in
                     self.items = snapshot.documents.map { itemData in
                         let id = itemData["itemId"] as! String
-                        let item : Item = items.filter { $0.id == id }.first!
+                        let filteredItem : Item = items.filter { $0.id == id }.first!
+                        let item : Item = Item(id: itemData.documentID, name: filteredItem.name, brand: filteredItem.brand, category: filteredItem.category, imageReference: filteredItem.imageReference, isBarcodeItem: filteredItem.isBarcodeItem)
+                        item.itemId = id
+                        item.image = filteredItem.image
                         item.quantity = itemData["quantity"] as? Int
                         item.creationDate = (itemData["creationDate"] as! Timestamp).dateValue()
                         item.expiryDate = (itemData["expiryDate"] as! Timestamp).dateValue()
                         item.state = FoodState.get(at: itemData["state"] as! Int)
+                        if item.state == .fresh {
+                            print()
+                        }
                         return item
                     }
-                    freshItems = items.filter { $0.state == .fresh }
-                    staleItems = items.filter { $0.state == .stale }
-                    expiredItems = items.filter { $0.state == .expired }
-                    setSections(state: FoodState.fresh)
+                    setItemsState()
+                    setSections()
                 }
             }
         }
@@ -63,109 +82,88 @@ import FirebaseAuth
         return dateFormatter.string(from: date)
     }
     
-    func setSections(state : FoodState) {
-        self.vegetablesSection = false
-        self.fruitsSection = false
-        self.grainSection = false
-        self.dairySection = false
-        self.meatSection = false
-        self.bakedSection = false
-        self.seaSection = false
-        self.nutsSection = false
-        self.herbsSection = false
-        self.oilSection = false
-        self.processedSection = false
-        
-        switch state {
-        case .fresh:
-            for item in freshItems {
-                changeSection(item: item)
-            }
-        case .stale:
-            for item in staleItems {
-                changeSection(item: item)
-            }
-        case .expired:
-            for item in expiredItems {
-                changeSection(item: item)
+    func setSections() {
+        vegetablesSection = false
+        fruitsSection = false
+        grainSection = false
+        dairySection = false
+        meatSection = false
+        bakedSection = false
+        seaSection = false
+        nutsSection = false
+        herbsSection = false
+        oilSection = false
+        processedSection = false
+
+        for category in Categories.allCases {
+            var items : [Item] = []
+            items = filteredItems.filter { $0.category == category }
+            if items.count > 0 {
+                switch category {
+                case .vegetables:
+                    vegetablesSection = true
+                case .fruits:
+                    fruitsSection = true
+                case .grains:
+                    grainSection = true
+                case .dairy:
+                    dairySection = true
+                case .meat:
+                    meatSection = true
+                case .bakedGoods:
+                    bakedSection = true
+                case .seafood:
+                    seaSection = true
+                case .nutsAndSeeds:
+                    nutsSection = true
+                case .herbsAndSpices:
+                    herbsSection = true
+                case .oil:
+                    oilSection = true
+                case .processedFoods:
+                    processedSection = true
+                }
             }
         }
     }
     
-    func changeSection(item : Item) {
-        if !vegetablesSection {
-            if item.category == .vegetables {
-                vegetablesSection = true
-                return
+    func setItemsState() {
+        let db = Firestore.firestore()
+        for (index, item) in items.enumerated() {
+            if item.state == .fresh || item.state == .stale {
+                if Date() >= item.expiryDate! {
+                    let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.id)
+                    document.setData(["state": FoodState.expired.rawValue], merge: true) { error in
+                        guard error == nil else {
+                            self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                            return
+                        }
+                    }
+                    items[index].state = .expired
+                } else if item.state == .fresh && checkStaleTime(item: item) {
+                    let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.id)
+                    document.setData(["state": FoodState.stale.rawValue], merge: true) { error in
+                        guard error == nil else {
+                            self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                            return
+                        }
+                    }
+                    items[index].state = .stale
+                }
             }
         }
+    }
+    
+    func checkStaleTime(item : Item) -> Bool {
+        let calendar = Calendar.current
+        let creationDate = calendar.startOfDay(for: item.creationDate!)
+        let expiryDate = calendar.startOfDay(for: item.expiryDate!)
         
-        if !fruitsSection {
-            if item.category == .fruits {
-                fruitsSection = true
-                return
-            }
+        let components = calendar.dateComponents([.day], from: creationDate, to: expiryDate)
+        let date = calendar.date(byAdding: .day, value: components.day! / 2, to: creationDate)!
+        if Date() > date {
+            return true
         }
-        
-        if !grainSection {
-            if item.category == .grains {
-                grainSection = true
-                return
-            }
-        }
-        
-        if !dairySection {
-            if item.category == .dairy {
-                dairySection = true
-            }
-        }
-        
-        if !meatSection {
-            if item.category == .meat {
-                meatSection = true
-                return
-            }
-        }
-        
-        if !bakedSection {
-            if item.category == .bakedGoods {
-                bakedSection = true
-            }
-        }
-        
-        if !seaSection {
-            if item.category == .seafood {
-                seaSection = true
-                return
-            }
-        }
-        
-        if !nutsSection {
-            if item.category == .nutsAndSeeds {
-                nutsSection = true
-                return
-            }
-        }
-        
-        if !herbsSection {
-            if item.category == .herbsAndSpices {
-                herbsSection = true
-                return
-            }
-        }
-        
-        if !oilSection {
-            if item.category == .oil {
-                oilSection = true
-                return
-            }
-        }
-        
-        if !processedSection {
-            if item.category == .processedFoods {
-                processedSection = true
-                return
-            }
-        }
+        return false
     }
 }

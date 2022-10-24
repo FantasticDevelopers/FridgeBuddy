@@ -16,7 +16,7 @@ import FirebaseStorage
     @Published var expiryDate : Date = Date()
     @Published var quantity : Int = 1
     
-    public func addNonBarcodeItem(completion: @escaping (Result<Item, Error>) -> Void) {
+    public func addNonBarcodeItem(completion: @escaping (Result<[Item], Error>) -> Void) {
         let storageRef = Storage.storage().reference()
         let imageData = item.image!.jpegData(compressionQuality: 0.8)
         
@@ -62,9 +62,9 @@ import FirebaseStorage
                 item.quantity = self.quantity
                 item.expiryDate = self.expiryDate
                 
-                let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
+                let userDocument = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
                 
-                document.setData([
+                userDocument.setData([
                     "itemId" : item.id,
                     "quantity": item.quantity!,
                     "expiryDate": item.expiryDate!,
@@ -75,7 +75,19 @@ import FirebaseStorage
                         completion(.failure(error!))
                         return
                     }
-                    completion(.success(item))
+                    
+                    let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, category: item.category, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
+                    userItem.itemId = item.id
+                    userItem.creationDate = Date()
+                    userItem.image = item.image
+                    userItem.expiryDays = item.expiryDays
+                    userItem.state = FoodState.fresh
+                    userItem.quantity = item.quantity
+                    userItem.expiryDate = item.expiryDate
+                    
+                    let items : [Item] = [item, userItem]
+                    
+                    completion(.success(items))
                 }
             }
         }

@@ -10,16 +10,25 @@ import SwiftUI
 struct AddInventoryView: View {
     var item : Item
     @StateObject var addInventoryViewModel = AddInventoryViewModel()
+    @EnvironmentObject var itemsViewModel : ItemsViewModel
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         VStack {
             HStack{
-                Image(uiImage: item.image!)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 50)
-                    .cornerRadius(10)
+                if let image = item.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 50)
+                        .cornerRadius(10)
+                } else {
+                    Image("NoImage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 50)
+                        .cornerRadius(10)
+                }
                     
                 VStack(alignment: .leading, spacing: 8) {
                     Text(item.name)
@@ -53,7 +62,15 @@ struct AddInventoryView: View {
             Spacer()
             
             Button {
-                addInventoryViewModel.addToInventory(item: item)
+                addInventoryViewModel.addToInventory(item: item) { (result) in
+                    switch result {
+                    case .success(let item):
+                        itemsViewModel.items.append(item)
+                        itemsViewModel.setSections()
+                    case .failure(let error):
+                        addInventoryViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
+                    }
+                }
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 ButtonView(buttonText: "Add to inventory")
@@ -62,6 +79,9 @@ struct AddInventoryView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            addInventoryViewModel.expiryDate = Calendar.current.date(byAdding: .day, value: item.expiryDays!, to: Date())!
+        }
     }
 }
 
