@@ -55,14 +55,20 @@ import FirebaseAuth
                 DispatchQueue.main.async { [self] in
                     self.items = snapshot.documents.map { itemData in
                         let id = itemData["itemId"] as! String
-                        let item : Item = items.filter { $0.id == id }.first!
-                        item.userItemId = itemData.documentID
+                        let filteredItem : Item = items.filter { $0.id == id }.first!
+                        let item : Item = Item(id: itemData.documentID, name: filteredItem.name, brand: filteredItem.brand, category: filteredItem.category, imageReference: filteredItem.imageReference, isBarcodeItem: filteredItem.isBarcodeItem)
+                        item.itemId = id
+                        item.image = filteredItem.image
                         item.quantity = itemData["quantity"] as? Int
                         item.creationDate = (itemData["creationDate"] as! Timestamp).dateValue()
                         item.expiryDate = (itemData["expiryDate"] as! Timestamp).dateValue()
                         item.state = FoodState.get(at: itemData["state"] as! Int)
+                        if item.state == .fresh {
+                            print()
+                        }
                         return item
                     }
+                    setItemsState()
                     setSections()
                 }
             }
@@ -119,5 +125,45 @@ import FirebaseAuth
                 }
             }
         }
+    }
+    
+    func setItemsState() {
+        let db = Firestore.firestore()
+        for (index, item) in items.enumerated() {
+            if item.state == .fresh || item.state == .stale {
+                if Date() >= item.expiryDate! {
+                    let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.id)
+                    document.setData(["state": FoodState.expired.rawValue], merge: true) { error in
+                        guard error == nil else {
+                            self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                            return
+                        }
+                    }
+                    items[index].state = .expired
+                } else if item.state == .fresh && checkStaleTime(item: item) {
+                    let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.id)
+                    document.setData(["state": FoodState.stale.rawValue], merge: true) { error in
+                        guard error == nil else {
+                            self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                            return
+                        }
+                    }
+                    items[index].state = .stale
+                }
+            }
+        }
+    }
+    
+    func checkStaleTime(item : Item) -> Bool {
+        let calendar = Calendar.current
+        let creationDate = calendar.startOfDay(for: item.creationDate!)
+        let expiryDate = calendar.startOfDay(for: item.expiryDate!)
+        
+        let components = calendar.dateComponents([.day], from: creationDate, to: expiryDate)
+        let date = calendar.date(byAdding: .day, value: components.day! / 2, to: creationDate)!
+        if Date() > date {
+            return true
+        }
+        return false
     }
 }

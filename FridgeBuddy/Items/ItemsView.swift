@@ -116,11 +116,20 @@ struct ItemSection : View {
             ForEach(itemsViewModel.filteredItems) { item in
                 if (item as Item).category == category {
                     VStack {
-                        Image(uiImage: item.image!)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(10)
-                            .frame(height: 120)
+                        if let image = item.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .frame(height: 120)
+                        } else {
+                            Image("NoImage")
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .frame(height: 120)
+                        }
+                        
                         
                         Text(item.name)
                             .lineLimit(1)

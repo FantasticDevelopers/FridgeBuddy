@@ -14,7 +14,7 @@ import FirebaseAuth
 
     func changeItemState(item : Item, completion: @escaping () -> Void) {
         let db = Firestore.firestore()
-        let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.userItemId!)
+        let document = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.id)
         document.setData(["state": item.state!.rawValue], merge: true) { error in
             guard error == nil else {
                 self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")

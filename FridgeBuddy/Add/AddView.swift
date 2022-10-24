@@ -20,8 +20,8 @@ struct AddView: View {
                     ForEach(addViewModel.filteredItems) { item in
                         HStack{
                             
-                            if item.image != nil {
-                                Image(uiImage: item.image!)
+                            if let image = item.image {
+                                Image(uiImage: image)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 50)

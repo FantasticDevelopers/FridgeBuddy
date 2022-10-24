@@ -73,9 +73,10 @@ struct AddFormView: View {
                     addFormViewModel.item.image = capturedPhoto
                     addFormViewModel.addNonBarcodeItem { (result) in
                         switch result {
-                        case .success(let item):
-                            addViewModel.items.append(item)
-                            itemsViewModel.items.append(item)
+                        case .success(let items):
+                            addViewModel.items.append(items[0])
+                            itemsViewModel.items.append(items[1])
+                            itemsViewModel.setSections()
                         case .failure(let error):
                             addFormViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                         }

@@ -15,11 +15,19 @@ struct ItemsDetailView: View {
     
     var body: some View {
         VStack {
-            Image(uiImage: item.image!)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(10)
-                .frame(height: 200)
+            if let image = item.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+                    .frame(height: 200)
+            } else {
+                Image("NoImage")
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+                    .frame(height: 200)
+            }
             
             Text(item.name)
                 .font(.largeTitle)
