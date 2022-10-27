@@ -43,7 +43,6 @@ import FirebaseStorage
             let document = db.collection("items").document()
             
             if item.isBarcodeItem {
-                item.isBarcodeItem = true
                 document.setData([
                     "name": item.name,
                     "brand": item.brand,
@@ -90,7 +89,7 @@ import FirebaseStorage
                         userItem.quantity = item.quantity
                         userItem.expiryDate = item.expiryDate
                         userItem.isBarcodeItem = true
-                        userItem.upc = userItem.upc
+                        userItem.upc = item.upc
                         
                         let items : [Item] = [item, userItem]
                         
