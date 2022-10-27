@@ -8,6 +8,8 @@ import SwiftUI
 
 struct CaptureItemPhotoView : View {
     @StateObject var captureItemPhotoViewModel = CaptureItemPhotoViewModel()
+    @EnvironmentObject var addFormViewModel : AddFormViewModel
+    @EnvironmentObject var addViewModel : AddViewModel
         
     @Environment(\.presentationMode) private var presentationMode
     
@@ -32,6 +34,9 @@ struct CaptureItemPhotoView : View {
                     HStack {
                         Button {
                             presentationMode.wrappedValue.dismiss()
+                            if addFormViewModel.item.isBarcodeItem {
+                                addViewModel.showBarcode.toggle()
+                            }
                             captureItemPhotoViewModel.cameraService.stopSession()
                         } label: {
                              Image(systemName: "xmark")
@@ -110,6 +115,9 @@ struct CaptureItemPhotoView : View {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button {
                             presentationMode.wrappedValue.dismiss()
+                            if addFormViewModel.item.isBarcodeItem {
+                                addViewModel.showBarcode.toggle()
+                            }
                         } label: {
                             Image(systemName: "arrowshape.turn.up.backward.fill")
                                 .resizable()

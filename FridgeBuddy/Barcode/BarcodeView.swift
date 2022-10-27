@@ -10,6 +10,7 @@ import SwiftUI
 struct BarcodeView: View {
     @StateObject var barcodeViewModel = BarcodeViewModel()
     @EnvironmentObject var itemViewModel : ItemsViewModel
+    @EnvironmentObject var addViewModel : AddViewModel
     @EnvironmentObject var addFormViewModel : AddFormViewModel
     
     @Environment(\.presentationMode) private var presentationMode
@@ -23,22 +24,28 @@ struct BarcodeView: View {
                         case .success(let barcode):
                             barcodeViewModel.upc = barcode
                             if let item = barcodeViewModel.checkGlobalDatabase(items: itemViewModel.items) {
-                                
+                                addViewModel.showBarcode.toggle()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    addViewModel.item = item
+                                    addViewModel.isAddingItem.toggle()
+                                }
                             } else {
                                 addFormViewModel.item.upc = barcodeViewModel.upc
                                 addFormViewModel.item.isBarcodeItem = true
-                                barcodeViewModel.showCamera.toggle()
-                                barcodeViewModel.showAddForm.toggle()
-                                //                            barcodeViewModel.getData { result in
-                                //                                switch result {
-                                //                                case .success(let barcodeItem):
-                                //                                    DispatchQueue.main.async {
-                                //                                        barcodeViewModel.barcodeItem = barcodeItem
-                                //                                    }
-                                //                                case .failure(let error):
-                                //                                    barcodeViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
-                                //                                }
-                                //                            }
+                                barcodeViewModel.getData { result in
+                                    switch result {
+                                    case .success(let barcodeItem):
+                                        DispatchQueue.main.async {
+                                            barcodeViewModel.barcodeItem = barcodeItem
+                                            addFormViewModel.item.name = barcodeViewModel.barcodeItem.nix_item_name
+                                            addFormViewModel.item.brand = barcodeViewModel.barcodeItem.nix_brand_name
+                                            barcodeViewModel.showCamera.toggle()
+                                            barcodeViewModel.showAddForm.toggle()
+                                        }
+                                    case .failure(let error):
+                                        barcodeViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
+                                    }
+                                }
                             }
                         case .failure(let error):
                             barcodeViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
@@ -83,7 +90,6 @@ struct BarcodeView: View {
                 } label: {
                     EmptyView()
                 }
-            
             }
         }
     }
