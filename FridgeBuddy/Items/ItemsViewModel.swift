@@ -59,6 +59,7 @@ import FirebaseAuth
                         let item : Item = Item(id: itemData.documentID, name: filteredItem.name, brand: filteredItem.brand, category: filteredItem.category, imageReference: filteredItem.imageReference, isBarcodeItem: filteredItem.isBarcodeItem)
                         item.itemId = id
                         item.image = filteredItem.image
+                        item.upc = filteredItem.upc
                         item.quantity = itemData["quantity"] as? Int
                         item.creationDate = (itemData["creationDate"] as! Timestamp).dateValue()
                         item.expiryDate = (itemData["expiryDate"] as! Timestamp).dateValue()

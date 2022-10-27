@@ -10,6 +10,8 @@ import Firebase
 import FirebaseStorage
 
 @MainActor final class AddViewModel : ObservableObject {
+    @Published var showAddDialog : Bool = false
+    @Published var showBarcode : Bool = false
     @Published var showCamera : Bool = false
     @Published var isAddingItem : Bool = false
     @Published var searchText : String = ""

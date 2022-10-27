@@ -57,7 +57,6 @@ struct CameraBarcodeView: UIViewControllerRepresentable {
                 guard let stringBarCode = readableObject.stringValue else { return }
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
                 parent.cameraBarcodeService.stopSession()
-                found(barcode: stringBarCode)
                 didfinishProcessingMetadata(.success(stringBarCode))
             }
             else{
@@ -67,7 +66,7 @@ struct CameraBarcodeView: UIViewControllerRepresentable {
         
         func found(barcode: String) {
                 print(barcode)
-            }
+        }
     }
     
 }

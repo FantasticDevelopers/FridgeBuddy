@@ -3,28 +3,24 @@
 //  FridgeBuddy
 //
 //  Created by Amandeep on 2022-08-01.
-//  Modified by Inderdeep on 2022-09-25.
 //
-
 import SwiftUI
 
 struct CaptureItemPhotoView : View {
     @StateObject var captureItemPhotoViewModel = CaptureItemPhotoViewModel()
-    @ObservedObject var addViewModel : AddViewModel
-    
+        
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         if captureItemPhotoViewModel.showCamera {
             ZStack {
-                CameraBarcodeView(cameraBarcodeService: captureItemPhotoViewModel.cameraBarcodeService){ result in
-                    switch result{
-                    case .success(let Barcode):
-                        do {
-                            captureItemPhotoViewModel.upc = Barcode
-                            captureItemPhotoViewModel.cameraService.stopSession()
-                            captureItemPhotoViewModel.showCamera.toggle()
-                            
+                CameraView(cameraService: captureItemPhotoViewModel.cameraService) { result in
+                    switch result {
+                    case .success(let photo):
+                        if let data = photo.fileDataRepresentation() {
+                            captureItemPhotoViewModel.cropImage(data: data)
+                        } else {
+                            captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: "Image not found.", buttonTitle: "Got it!")
                         }
                     case .failure(let error):
                         captureItemPhotoViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
@@ -74,45 +70,41 @@ struct CaptureItemPhotoView : View {
             } message: {
                 captureItemPhotoViewModel.alertItem.message
             }
-        }
-        else {
+        } else {
             NavigationView {
                 VStack {
-                    Text("Brand - \(captureItemPhotoViewModel.barcodeItem.nix_brand_name) \n \(captureItemPhotoViewModel.barcodeItem.nix_item_name)")
-                        .task{
-                            await captureItemPhotoViewModel.getData()
-                    }
+                    Text("Public Photo")
                     
                     Spacer()
                     
-//                    Image(uiImage: captureItemPhotoViewModel.capturedImage!)
-//                        .resizable()
-//                        .cornerRadius(10)
-//                        .frame(width: captureItemPhotoViewModel.cameraService.previewlayer.frame.width, height: captureItemPhotoViewModel.cameraService.previewlayer.frame.height)
-//
-//                    Spacer()
-//                    Spacer()
+                    Image(uiImage: captureItemPhotoViewModel.capturedImage!)
+                        .resizable()
+                        .cornerRadius(10)
+                        .frame(width: captureItemPhotoViewModel.cameraService.previewlayer.frame.width, height: captureItemPhotoViewModel.cameraService.previewlayer.frame.height)
                     
-//                    HStack {
-//                        NavigationLink(destination: AddFormView(addViewModel: addViewModel ,capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
-//                            ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
-//                                .padding(.leading)
-//                        }
+                    Spacer()
+                    Spacer()
+                    
+                    HStack {
+                        NavigationLink(destination: AddFormView(capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
+                            ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
+                                .padding(.leading)
+                        }
                         
-//                        Spacer()
+                        Spacer()
                        
-//                        Button {
-//                            captureItemPhotoViewModel.cameraService.startSession()
-//                            DispatchQueue.main.async {
-//                                withAnimation {
-//                                    captureItemPhotoViewModel.showCamera.toggle()
-//                                }
-//                            }
-//                        } label: {
-//                            ButtonView(buttonText: "Retake", width: 150, symbol: "camera.circle.fill")
-//                                .padding(.trailing)
-//                        }
-//                    }
+                        Button {
+                            captureItemPhotoViewModel.cameraService.startSession()
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    captureItemPhotoViewModel.showCamera.toggle()
+                                }
+                            }
+                        } label: {
+                            ButtonView(buttonText: "Retake", width: 150, symbol: "camera.circle.fill")
+                                .padding(.trailing)
+                        }
+                    }
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -134,7 +126,6 @@ struct CaptureItemPhotoView : View {
 
 struct CaptureItemPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        CaptureItemPhotoView(addViewModel: AddViewModel())
+        CaptureItemPhotoView()
     }
 }
-

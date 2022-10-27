@@ -71,7 +71,9 @@ class CameraBarcodeService {
     
     func startSession() {
         if !session.isRunning {
-            session.startRunning()
+            DispatchQueue.global(qos: .background).async {
+                self.session.startRunning()
+            }
         }
     }
     
@@ -80,10 +82,4 @@ class CameraBarcodeService {
             session.stopRunning()
         }
     }
-    // code has no implementation but remains here
-//    func captureCode(with settings : AVCapturePhotoSettings = AVCapturePhotoSettings()) {
-//        output.capturePhoto(with: settings, delegate: delegate!)
-//    }
-    
 }
-

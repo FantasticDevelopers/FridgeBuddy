@@ -42,52 +42,109 @@ import FirebaseStorage
             
             let document = db.collection("items").document()
             
-            document.setData([
-                "name": item.name,
-                "brand": item.brand,
-                "category": item.category.rawValue,
-                "expiryDays": item.expiryDays!,
-                "imageReference": item.imageReference,
-                "isBarcodeItem": item.isBarcodeItem
-            ]) { error in
-                guard error == nil else {
-                    completion(.failure(error!))
-                    return
-                }
-                
-                let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
-                item.image = self.item.image
-                item.expiryDays = self.item.expiryDays
-                item.state = FoodState.fresh
-                item.quantity = self.quantity
-                item.expiryDate = self.expiryDate
-                
-                let userDocument = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
-                
-                userDocument.setData([
-                    "itemId" : item.id,
-                    "quantity": item.quantity!,
-                    "expiryDate": item.expiryDate!,
-                    "state": item.state!.rawValue,
-                    "creationDate": Date()
+            if item.isBarcodeItem {
+                item.isBarcodeItem = true
+                document.setData([
+                    "name": item.name,
+                    "brand": item.brand,
+                    "category": item.category.rawValue,
+                    "expiryDays": item.expiryDays!,
+                    "imageReference": item.imageReference,
+                    "isBarcodeItem": item.isBarcodeItem,
+                    "upc": item.upc!
                 ]) { error in
                     guard error == nil else {
                         completion(.failure(error!))
                         return
                     }
                     
-                    let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, category: item.category, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
-                    userItem.itemId = item.id
-                    userItem.creationDate = Date()
-                    userItem.image = item.image
-                    userItem.expiryDays = item.expiryDays
-                    userItem.state = FoodState.fresh
-                    userItem.quantity = item.quantity
-                    userItem.expiryDate = item.expiryDate
+                    let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
+                    item.image = self.item.image
+                    item.expiryDays = self.item.expiryDays
+                    item.state = FoodState.fresh
+                    item.quantity = self.quantity
+                    item.expiryDate = self.expiryDate
+                    item.isBarcodeItem = true
+                    item.upc = self.item.upc
                     
-                    let items : [Item] = [item, userItem]
+                    let userDocument = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
                     
-                    completion(.success(items))
+                    userDocument.setData([
+                        "itemId" : item.id,
+                        "quantity": item.quantity!,
+                        "expiryDate": item.expiryDate!,
+                        "state": item.state!.rawValue,
+                        "creationDate": Date()
+                    ]) { error in
+                        guard error == nil else {
+                            completion(.failure(error!))
+                            return
+                        }
+                        
+                        let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, category: item.category, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
+                        userItem.itemId = item.id
+                        userItem.creationDate = Date()
+                        userItem.image = item.image
+                        userItem.expiryDays = item.expiryDays
+                        userItem.state = FoodState.fresh
+                        userItem.quantity = item.quantity
+                        userItem.expiryDate = item.expiryDate
+                        userItem.isBarcodeItem = true
+                        userItem.upc = userItem.upc
+                        
+                        let items : [Item] = [item, userItem]
+                        
+                        completion(.success(items))
+                    }
+                }
+            } else {
+                document.setData([
+                    "name": item.name,
+                    "brand": item.brand,
+                    "category": item.category.rawValue,
+                    "expiryDays": item.expiryDays!,
+                    "imageReference": item.imageReference,
+                    "isBarcodeItem": item.isBarcodeItem
+                ]) { error in
+                    guard error == nil else {
+                        completion(.failure(error!))
+                        return
+                    }
+                    
+                    let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
+                    item.image = self.item.image
+                    item.expiryDays = self.item.expiryDays
+                    item.state = FoodState.fresh
+                    item.quantity = self.quantity
+                    item.expiryDate = self.expiryDate
+                    
+                    let userDocument = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
+                    
+                    userDocument.setData([
+                        "itemId" : item.id,
+                        "quantity": item.quantity!,
+                        "expiryDate": item.expiryDate!,
+                        "state": item.state!.rawValue,
+                        "creationDate": Date()
+                    ]) { error in
+                        guard error == nil else {
+                            completion(.failure(error!))
+                            return
+                        }
+                        
+                        let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, category: item.category, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
+                        userItem.itemId = item.id
+                        userItem.creationDate = Date()
+                        userItem.image = item.image
+                        userItem.expiryDays = item.expiryDays
+                        userItem.state = FoodState.fresh
+                        userItem.quantity = item.quantity
+                        userItem.expiryDate = item.expiryDate
+                        
+                        let items : [Item] = [item, userItem]
+                        
+                        completion(.success(items))
+                    }
                 }
             }
         }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AddView: View {
     @EnvironmentObject var addViewModel : AddViewModel
-    @EnvironmentObject var launchViewModel : LaunchViewModel
     
     @Environment(\.colorScheme) var scheme
     
@@ -65,7 +64,7 @@ struct AddView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button {
-                        addViewModel.showCamera.toggle()
+                        addViewModel.showAddDialog.toggle()
                     } label: {
                         Image(systemName: "plus.viewfinder")
                     }
@@ -73,7 +72,10 @@ struct AddView: View {
             }
         }
         .fullScreenCover(isPresented: $addViewModel.showCamera) {
-                        CaptureItemPhotoView()
+            CaptureItemPhotoView()
+        }
+        .fullScreenCover(isPresented: $addViewModel.showBarcode) {
+            BarcodeView()
         }
         .sheet(isPresented: $addViewModel.isAddingItem) {
             if #available(iOS 16.0, *) {
@@ -83,6 +85,18 @@ struct AddView: View {
                 AddInventoryView(item: addViewModel.item)
             }
         }
+        .confirmationDialog("Add", isPresented: $addViewModel.showAddDialog) {
+            Button("Yes") {
+                addViewModel.showBarcode.toggle()
+            }
+            
+            Button("No") {
+                addViewModel.showCamera.toggle()
+            }
+        } message: {
+            Text("Want to add an item with barcode? Click Yes! \n For non-barcode item, click No!")
+        }
+
     }
 }
 

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AddFormView: View {
-    @StateObject var addFormViewModel = AddFormViewModel()
+    @EnvironmentObject var addFormViewModel : AddFormViewModel
     @EnvironmentObject var addViewModel : AddViewModel
     @EnvironmentObject var itemsViewModel : ItemsViewModel
     
-    var capturedPhoto : UIImage
+    var capturedPhoto : UIImage = UIImage(imageLiteralResourceName: "NoImage")
     
     @Environment(\.presentationMode) private var presentationMode
         
@@ -81,7 +81,11 @@ struct AddFormView: View {
                             addFormViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                         }
                     }
-                    addViewModel.showCamera.toggle()
+                    if addFormViewModel.item.isBarcodeItem {
+                        addViewModel.showBarcode.toggle()
+                    } else {
+                        addViewModel.showCamera.toggle()
+                    }
                 } label: {
                     ButtonView(buttonText: "Add Item", symbol: "plus.circle.fill")
                 }
@@ -113,9 +117,8 @@ struct AddFormView: View {
 }
 
 struct AddFormView_Previews: PreviewProvider {
-   static var capturedPhoto : UIImage = UIImage(imageLiteralResourceName: "LoginIcon")
     
     static var previews: some View {
-        AddFormView(capturedPhoto: capturedPhoto)
+        AddFormView()
     }
 }

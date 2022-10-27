@@ -40,7 +40,10 @@
 		078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */; };
 		078FF9CE288B798200BD5E7D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CD288B798200BD5E7D /* SignUpView.swift */; };
 		078FF9D0288B799000BD5E7D /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */; };
-		07A25E3328C6D66E00DCAC28 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */; };
+		079BCBD22908B93500B36209 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BCBD12908B93500B36209 /* BarcodeView.swift */; };
+		079BCBD42908B94500B36209 /* BarcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079BCBD32908B94500B36209 /* BarcodeViewModel.swift */; };
+		07B6F6EE29063E6100EA4404 /* ItemsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B6F6ED29063E6100EA4404 /* ItemsDetailView.swift */; };
+		07B6F6F029063E6800EA4404 /* ItemsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B6F6EF29063E6800EA4404 /* ItemsDetailViewModel.swift */; };
 		07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */; };
 		07F1D7B1288B9A0C00178430 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B0288B9A0B00178430 /* ButtonView.swift */; };
 		07F1D7B3288B9C0700178430 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B2288B9C0700178430 /* TextFieldView.swift */; };
@@ -83,7 +86,10 @@
 		078FF9CB288AEF3500BD5E7D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		078FF9CD288B798200BD5E7D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		078FF9CF288B799000BD5E7D /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
-		07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		079BCBD12908B93500B36209 /* BarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
+		079BCBD32908B94500B36209 /* BarcodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeViewModel.swift; sourceTree = "<group>"; };
+		07B6F6ED29063E6100EA4404 /* ItemsDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsDetailView.swift; sourceTree = "<group>"; };
+		07B6F6EF29063E6800EA4404 /* ItemsDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsDetailViewModel.swift; sourceTree = "<group>"; };
 		07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodState.swift; sourceTree = "<group>"; };
 		07F1D7B0288B9A0B00178430 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		07F1D7B2288B9C0700178430 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
@@ -113,6 +119,8 @@
 			children = (
 				078760652898D1AD00285CC1 /* CaptureItemPhotoView.swift */,
 				07202F24289F04EF00C68AC3 /* CaptureItemPhotoViewModel.swift */,
+				0787606128986A1B00285CC1 /* CameraView.swift */,
+				078760632898A11400285CC1 /* CameraService.swift */,
 			);
 			path = CaptureItemphoto;
 			sourceTree = "<group>";
@@ -136,10 +144,10 @@
 		072B88792888D7940016BC95 /* FridgeBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				078FF9C8288AEF0F00BD5E7D /* Account */,
+				079BCBD02908B91600B36209 /* Barcode */,
 				07F1D7AF288B99CE00178430 /* Helpers */,
 				07202F21289EE42A00C68AC3 /* CaptureItemphoto */,
-				0787606028986A0E00285CC1 /* Camera */,
-				078FF9C8288AEF0F00BD5E7D /* Account */,
 				072B889A2888F9C80016BC95 /* More */,
 				072B88992888F9C00016BC95 /* Recipes */,
 				072B88972888F9AE0016BC95 /* Add */,
@@ -187,6 +195,8 @@
 		072B88962888F99E0016BC95 /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				07B6F6EF29063E6800EA4404 /* ItemsDetailViewModel.swift */,
+				07B6F6ED29063E6100EA4404 /* ItemsDetailView.swift */,
 				072B889B2888F9E80016BC95 /* ItemsView.swift */,
 				072B889D2888F9FE0016BC95 /* ItemsViewModel.swift */,
 			);
@@ -224,17 +234,6 @@
 			path = More;
 			sourceTree = "<group>";
 		};
-		0787606028986A0E00285CC1 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				0787606128986A1B00285CC1 /* CameraView.swift */,
-				078760632898A11400285CC1 /* CameraService.swift */,
-				86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */,
-				86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
 		078FF9C8288AEF0F00BD5E7D /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +245,17 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
+		079BCBD02908B91600B36209 /* Barcode */ = {
+			isa = PBXGroup;
+			children = (
+				079BCBD12908B93500B36209 /* BarcodeView.swift */,
+				079BCBD32908B94500B36209 /* BarcodeViewModel.swift */,
+				86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */,
+				86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */,
+			);
+			path = Barcode;
+			sourceTree = "<group>";
+		};
 		07F1D7AF288B99CE00178430 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,7 +263,6 @@
 				07F1D7B2288B9C0700178430 /* TextFieldView.swift */,
 				07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */,
 				07F1D7B6288BA37C00178430 /* IconView.swift */,
-				07A25E3228C6D66E00DCAC28 /* SearchBarView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -311,6 +320,7 @@
 				0704B9CC288C7CC600E216D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				07A0BF0928DFA6A30064C098 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 				07A0BF0C28DFAF860064C098 /* XCRemoteSwiftPackageReference "HalfASheet" */,
+				07D97456290A2BBC00A75D51 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 072B88782888D7940016BC95 /* Products */;
 			projectDirPath = "";
@@ -354,20 +364,23 @@
 				071B63BC28DBFCB5007B56AE /* Category.swift in Sources */,
 				0704B9CB288C5B9500E216D8 /* AlertItemView.swift in Sources */,
 				072B88A22888FA2A0016BC95 /* AddViewModel.swift in Sources */,
+				07B6F6F029063E6800EA4404 /* ItemsDetailViewModel.swift in Sources */,
 				072B88A02888FA1C0016BC95 /* AddView.swift in Sources */,
 				07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */,
 				078760682898DBD200285CC1 /* AddFormView.swift in Sources */,
+				079BCBD42908B94500B36209 /* BarcodeViewModel.swift in Sources */,
 				078760642898A11400285CC1 /* CameraService.swift in Sources */,
 				078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */,
 				07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */,
-				07A25E3328C6D66E00DCAC28 /* SearchBarView.swift in Sources */,
 				0787606A2898DF7800285CC1 /* AddFormViewModel.swift in Sources */,
+				079BCBD22908B93500B36209 /* BarcodeView.swift in Sources */,
 				07F1D7B7288BA37C00178430 /* IconView.swift in Sources */,
 				072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */,
 				078760662898D1AD00285CC1 /* CaptureItemPhotoView.swift in Sources */,
 				078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */,
 				0789A69428E544AF006B0502 /* AddInventoryViewModel.swift in Sources */,
 				072B88A62888FA6F0016BC95 /* RecipesViewModel.swift in Sources */,
+				07B6F6EE29063E6100EA4404 /* ItemsDetailView.swift in Sources */,
 				8610AAAF28FE60E900D6EED9 /* BarCodeItem.swift in Sources */,
 				072B88932888DD0C0016BC95 /* LaunchViewModel.swift in Sources */,
 				072B889C2888F9E80016BC95 /* ItemsView.swift in Sources */,
@@ -503,7 +516,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FridgeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = N7WB37K3MQ;
+				DEVELOPMENT_TEAM = 8MJU534P5N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
@@ -534,7 +547,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FridgeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = N7WB37K3MQ;
+				DEVELOPMENT_TEAM = 8MJU534P5N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
@@ -603,6 +616,14 @@
 			requirement = {
 				branch = develop;
 				kind = branch;
+			};
+		};
+		07D97456290A2BBC00A75D51 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

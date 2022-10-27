@@ -21,6 +21,7 @@ struct LaunchView: View {
                         Text("Items")
                     }
                 AddView()
+                    .environmentObject(AddFormViewModel())
                     .tabItem {
                         Image(systemName: "plus.app.fill")
                         Text("Add")
