@@ -12,13 +12,27 @@ struct MoreView: View {
     @EnvironmentObject var launchViewModel : LaunchViewModel
     
     var body: some View {
-        Button {
-            moreViewModel.signOut()
-            launchViewModel.checkLogin()
-        } label: {
-            ButtonView(buttonText: "Sign Out")
+        VStack {
+            Text(moreViewModel.name)
+                .padding(.vertical, 10.0)
+                .padding(.horizontal)
+                .background(RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.green, lineWidth: 2))
+                .padding(.top)
+            
+            Spacer()
+            
+            Button {
+                moreViewModel.signOut()
+                launchViewModel.checkLogin()
+            } label: {
+                ButtonView(buttonText: "Sign Out")
+            }
+            .padding(.bottom)
         }
-
+        .onAppear {
+            moreViewModel.getName()
+        }
     }
 }
 
