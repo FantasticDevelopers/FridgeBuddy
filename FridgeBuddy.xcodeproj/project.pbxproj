@@ -195,8 +195,8 @@
 		072B88962888F99E0016BC95 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				07B6F6EF29063E6800EA4404 /* ItemsDetailViewModel.swift */,
 				07B6F6ED29063E6100EA4404 /* ItemsDetailView.swift */,
+				07B6F6EF29063E6800EA4404 /* ItemsDetailViewModel.swift */,
 				072B889B2888F9E80016BC95 /* ItemsView.swift */,
 				072B889D2888F9FE0016BC95 /* ItemsViewModel.swift */,
 			);

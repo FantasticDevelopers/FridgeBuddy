@@ -68,6 +68,19 @@ struct ItemsDetailView: View {
             .background(RoundedRectangle(cornerRadius: 4)
                 .stroke( Color.black.opacity(0.7), lineWidth: 2))
             .padding()
+            
+            Button {
+                itemsDetailViewModel.deleteItem(item: item) {
+                    itemsViewModel.items.removeAll { item in
+                        return item.id == self.item.id
+                    }
+                    itemsViewModel.setSections()
+                    itemsViewModel.showDetails.toggle()
+                }
+            } label: {
+                ButtonView(buttonText: "Delete Item", symbol: "minus.circle")
+            }
+
         }
         .onAppear {
             state = item.state!

@@ -24,4 +24,15 @@ import FirebaseAuth
         }
     }
     
+    func deleteItem(item : Item, completion: @escaping () -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document(item.id).delete { error in
+            guard error == nil else {
+                self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                return
+            }
+            completion()
+        }
+    }
 }
