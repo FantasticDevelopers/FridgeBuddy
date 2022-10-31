@@ -14,6 +14,7 @@ import SwiftUI
 @MainActor final class CaptureItemPhotoViewModel : ObservableObject {
     @Published var cameraService = CameraService()
     @Published var showCamera : Bool = true
+    @Published var addItem : Bool = false
     @Published var alertItem = AlertItemView()
     @Published var capturedImage : UIImage?
     

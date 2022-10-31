@@ -27,17 +27,6 @@ import FirebaseAuth
     
     @Published var searchText : String = ""
     @Published var alertItem = AlertItemView()
-    @Published var vegetablesSection : Bool = false
-    @Published var fruitsSection : Bool = false
-    @Published var grainSection : Bool = false
-    @Published var dairySection : Bool = false
-    @Published var meatSection : Bool = false
-    @Published var bakedSection : Bool = false
-    @Published var seaSection : Bool = false
-    @Published var nutsSection : Bool = false
-    @Published var herbsSection : Bool = false
-    @Published var oilSection : Bool = false
-    @Published var processedSection : Bool = false
     @Published var showDetails : Bool = false
     
     var item : Item = Item()
@@ -56,7 +45,7 @@ import FirebaseAuth
                     self.items = snapshot.documents.map { itemData in
                         let id = itemData["itemId"] as! String
                         let filteredItem : Item = items.filter { $0.id == id }.first!
-                        let item : Item = Item(id: itemData.documentID, name: filteredItem.name, brand: filteredItem.brand, category: filteredItem.category, imageReference: filteredItem.imageReference, isBarcodeItem: filteredItem.isBarcodeItem)
+                        let item : Item = Item(id: itemData.documentID, name: filteredItem.name, brand: filteredItem.brand, imageReference: filteredItem.imageReference, isBarcodeItem: filteredItem.isBarcodeItem)
                         item.itemId = id
                         item.image = filteredItem.image
                         item.upc = filteredItem.upc
@@ -65,13 +54,9 @@ import FirebaseAuth
                         item.creationDate = (itemData["creationDate"] as! Timestamp).dateValue()
                         item.expiryDate = (itemData["expiryDate"] as! Timestamp).dateValue()
                         item.state = FoodState.get(at: itemData["state"] as! Int)
-                        if item.state == .fresh {
-                            print()
-                        }
                         return item
                     }
                     setItemsState()
-                    setSections()
                 }
             }
         }
@@ -82,51 +67,6 @@ import FirebaseAuth
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         return dateFormatter.string(from: date)
-    }
-    
-    func setSections() {
-        vegetablesSection = false
-        fruitsSection = false
-        grainSection = false
-        dairySection = false
-        meatSection = false
-        bakedSection = false
-        seaSection = false
-        nutsSection = false
-        herbsSection = false
-        oilSection = false
-        processedSection = false
-
-        for category in Categories.allCases {
-            var items : [Item] = []
-            items = filteredItems.filter { $0.category == category }
-            if items.count > 0 {
-                switch category {
-                case .vegetables:
-                    vegetablesSection = true
-                case .fruits:
-                    fruitsSection = true
-                case .grains:
-                    grainSection = true
-                case .dairy:
-                    dairySection = true
-                case .meat:
-                    meatSection = true
-                case .bakedGoods:
-                    bakedSection = true
-                case .seafood:
-                    seaSection = true
-                case .nutsAndSeeds:
-                    nutsSection = true
-                case .herbsAndSpices:
-                    herbsSection = true
-                case .oil:
-                    oilSection = true
-                case .processedFoods:
-                    processedSection = true
-                }
-            }
-        }
     }
     
     func setItemsState() {

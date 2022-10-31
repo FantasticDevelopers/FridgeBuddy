@@ -52,7 +52,7 @@ struct ItemsDetailView: View {
                     itemsDetailViewModel.changeItemState(item: item) {
                         if let index = itemsViewModel.items.firstIndex(where: {$0.id == item.id}) {
                             itemsViewModel.items[index].state = item.state
-                            itemsViewModel.setSections()
+                            itemsViewModel.showDetails.toggle()
                         }
                     }
                 }) {
@@ -74,7 +74,6 @@ struct ItemsDetailView: View {
                     itemsViewModel.items.removeAll { item in
                         return item.id == self.item.id
                     }
-                    itemsViewModel.setSections()
                     itemsViewModel.showDetails.toggle()
                 }
             } label: {

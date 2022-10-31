@@ -25,8 +25,7 @@ struct AddView: View {
                                     .scaledToFit()
                                     .frame(height: 50)
                                     .cornerRadius(10)
-                            }
-                            else {
+                            } else {
                                 Image("NoImage")
                                     .resizable()
                                     .scaledToFit()
@@ -40,7 +39,7 @@ struct AddView: View {
                                     .lineLimit(2)
                                     .minimumScaleFactor(0.5)
 
-                                Text(item.category.value)
+                                Text(item.brand.isEmpty ? "No brand" : item.brand)
                                     .font(.subheadline)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)

@@ -11,6 +11,7 @@ struct AddInventoryView: View {
     var item : Item
     @StateObject var addInventoryViewModel = AddInventoryViewModel()
     @EnvironmentObject var itemsViewModel : ItemsViewModel
+    @EnvironmentObject var addViewModel : AddViewModel
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
@@ -36,7 +37,7 @@ struct AddInventoryView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
 
-                    Text(item.category.value)
+                    Text(item.brand.isEmpty ? "No brand" : item.brand)
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -64,9 +65,11 @@ struct AddInventoryView: View {
             Button {
                 addInventoryViewModel.addToInventory(item: item) { (result) in
                     switch result {
-                    case .success(let item):
-                        itemsViewModel.items.append(item)
-                        itemsViewModel.setSections()
+                    case .success(let items):
+                        itemsViewModel.items.append(items[0])
+                        if items.count == 2 {
+                            addViewModel.items.append(items[1])
+                        }
                     case .failure(let error):
                         addInventoryViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                     }
@@ -80,7 +83,9 @@ struct AddInventoryView: View {
         }
         .padding()
         .onAppear {
-            addInventoryViewModel.expiryDate = Calendar.current.date(byAdding: .day, value: item.expiryDays!, to: Date())!
+            if let expiryDays = item.expiryDays {
+                addInventoryViewModel.expiryDate = Calendar.current.date(byAdding: .day, value: expiryDays, to: Date())!
+            }
         }
     }
 }

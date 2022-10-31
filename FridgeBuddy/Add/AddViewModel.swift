@@ -36,7 +36,7 @@ import FirebaseStorage
             
             if let snapshot = snapshot {
                 let items : [Item] = snapshot.documents.map { itemData in
-                    let item = Item(id: itemData.documentID, name: itemData["name"] as? String ?? "", brand: itemData["brand"] as? String ?? "", category: Categories.get(at: itemData["category"] as? Int ?? 0), imageReference: itemData["imageReference"] as? String ?? "", isBarcodeItem: itemData["isBarcodeItem"] as? Bool ?? false)
+                    let item = Item(id: itemData.documentID, name: itemData["name"] as? String ?? "", brand: itemData["brand"] as? String ?? "", imageReference: itemData["imageReference"] as? String ?? "", isBarcodeItem: itemData["isBarcodeItem"] as? Bool ?? false)
                     
                     
                     if let expiryDays = itemData["expiryDays"] as? Int {

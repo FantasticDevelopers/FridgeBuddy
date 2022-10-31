@@ -25,7 +25,7 @@ struct SecureTextFieldView: View {
                 visible.toggle()
             } label: {
                 Image(systemName: visible ? "eye.slash.fill" : "eye.fill")
-                    .foregroundColor(Color.black.opacity(0.7))
+                    .foregroundColor(Color.green)
             }
         }
         .padding(.vertical, 10.0)

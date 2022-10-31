@@ -91,9 +91,25 @@ struct CaptureItemPhotoView : View {
                     Spacer()
                     
                     HStack {
-                        NavigationLink(destination: AddFormView(capturedPhoto: captureItemPhotoViewModel.capturedImage!)) {
+                        Button {
+                            if addFormViewModel.item.name.isEmpty || addFormViewModel.item.brand.isEmpty {
+                                addFormViewModel.item.image = captureItemPhotoViewModel.capturedImage
+                                captureItemPhotoViewModel.addItem.toggle()
+                            } else {
+                                addViewModel.showBarcode.toggle()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    addViewModel.item = addFormViewModel.item
+                                    addViewModel.item.image = captureItemPhotoViewModel.capturedImage
+                                    addViewModel.isAddingItem.toggle()
+                                }
+                            }
+                        } label: {
                             ButtonView(buttonText: "Add Item", width: 150, symbol: "plus.circle.fill")
                                 .padding(.leading)
+                        }
+                        
+                        NavigationLink(destination: AddFormView(), isActive: $captureItemPhotoViewModel.addItem) {
+                            EmptyView()
                         }
                         
                         Spacer()
@@ -114,9 +130,10 @@ struct CaptureItemPhotoView : View {
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button {
-                            presentationMode.wrappedValue.dismiss()
                             if addFormViewModel.item.isBarcodeItem {
                                 addViewModel.showBarcode.toggle()
+                            } else {
+                                presentationMode.wrappedValue.dismiss()
                             }
                         } label: {
                             Image(systemName: "arrowshape.turn.up.backward.fill")

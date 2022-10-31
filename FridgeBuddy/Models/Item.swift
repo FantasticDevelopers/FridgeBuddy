@@ -13,7 +13,6 @@ class Item : Identifiable {
     var itemId : String?
     var name : String
     var brand : String
-    var category : Categories
     var state : FoodState?
     var quantity : Int?
     var expiryDate : Date?
@@ -28,18 +27,16 @@ class Item : Identifiable {
         self.id = ""
         self.name = ""
         self.brand = ""
-        self.category = .vegetables
         self.quantity = 1
         self.expiryDate = Date()
         self.imageReference = ""
         self.isBarcodeItem = false
     }
     
-    init(id : String, name : String, brand : String, category : Categories, imageReference : String, isBarcodeItem : Bool) {
+    init(id : String, name : String, brand : String, imageReference : String, isBarcodeItem : Bool) {
         self.id = id
         self.name = name
         self.brand = brand
-        self.category = category
         self.imageReference = imageReference
         self.isBarcodeItem = isBarcodeItem
     }

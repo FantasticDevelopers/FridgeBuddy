@@ -12,8 +12,6 @@ struct AddFormView: View {
     @EnvironmentObject var addViewModel : AddViewModel
     @EnvironmentObject var itemsViewModel : ItemsViewModel
     
-    var capturedPhoto : UIImage = UIImage(imageLiteralResourceName: "NoImage")
-    
     @Environment(\.presentationMode) private var presentationMode
         
     var body: some View {
@@ -23,36 +21,26 @@ struct AddFormView: View {
                     .foregroundColor(Color.green)
                     .font(.largeTitle)
                 
-                Image(uiImage: capturedPhoto)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
-                    .cornerRadius(10)
-                    .padding(.bottom)
+                if let image = addFormViewModel.item.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
+                        .cornerRadius(10)
+                        .padding(.bottom)
+                } else {
+                    Image("NoImage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
+                        .cornerRadius(10)
+                        .padding(.bottom)
+                }
                 
                 Group {
                     TextFieldView(text: "Name", value: $addFormViewModel.item.name)
                     
                     TextFieldView(text: "Brand", value: $addFormViewModel.item.brand)
-                    
-                    HStack {
-                        Text("Category")
-                        
-                        Spacer()
-                        
-                        Picker(selection: $addFormViewModel.item.category) {
-                            ForEach(Categories.allCases, id: \.self) { category in
-                                Text(category.value)
-                            }
-                        } label: {
-                            Text("Category")
-                        }
-                    }
-                    .padding(.vertical, 5.0)
-                    .padding(.horizontal)
-                    .background(RoundedRectangle(cornerRadius: 4)
-                        .stroke( Color.black.opacity(0.7), lineWidth: 2))
-                    .padding(.bottom)
                     
                     Stepper("Quantity: \(addFormViewModel.quantity)", value: $addFormViewModel.quantity, in: 1...1000)
                         .padding(.vertical, 5.0)
@@ -70,13 +58,11 @@ struct AddFormView: View {
                 }
                 
                 Button {
-                    addFormViewModel.item.image = capturedPhoto
                     addFormViewModel.addNonBarcodeItem { (result) in
                         switch result {
                         case .success(let items):
                             addViewModel.items.append(items[0])
                             itemsViewModel.items.append(items[1])
-                            itemsViewModel.setSections()
                         case .failure(let error):
                             addFormViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                         }
@@ -93,7 +79,6 @@ struct AddFormView: View {
                 Spacer()
             }
             .padding()
-            .offset(y: -60)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {

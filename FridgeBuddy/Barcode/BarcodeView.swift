@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BarcodeView: View {
     @StateObject var barcodeViewModel = BarcodeViewModel()
-    @EnvironmentObject var itemViewModel : ItemsViewModel
     @EnvironmentObject var addViewModel : AddViewModel
     @EnvironmentObject var addFormViewModel : AddFormViewModel
     
@@ -23,7 +22,7 @@ struct BarcodeView: View {
                         switch result{
                         case .success(let barcode):
                             barcodeViewModel.upc = barcode
-                            if let item = barcodeViewModel.checkGlobalDatabase(items: itemViewModel.items) {
+                            if let item = barcodeViewModel.checkGlobalDatabase(items: addViewModel.items) {
                                 addViewModel.showBarcode.toggle()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     addViewModel.item = item
@@ -36,9 +35,8 @@ struct BarcodeView: View {
                                     switch result {
                                     case .success(let barcodeItem):
                                         DispatchQueue.main.async {
-                                            barcodeViewModel.barcodeItem = barcodeItem
-                                            addFormViewModel.item.name = barcodeViewModel.barcodeItem.nix_item_name
-                                            addFormViewModel.item.brand = barcodeViewModel.barcodeItem.nix_brand_name
+                                            addFormViewModel.item.name = barcodeItem.nix_item_name
+                                            addFormViewModel.item.brand = barcodeItem.nix_brand_name
                                             barcodeViewModel.showCamera.toggle()
                                             barcodeViewModel.showAddForm.toggle()
                                         }

@@ -46,7 +46,6 @@ import FirebaseStorage
                 document.setData([
                     "name": item.name,
                     "brand": item.brand,
-                    "category": item.category.rawValue,
                     "expiryDays": item.expiryDays!,
                     "imageReference": item.imageReference,
                     "isBarcodeItem": item.isBarcodeItem,
@@ -57,22 +56,18 @@ import FirebaseStorage
                         return
                     }
                     
-                    let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
+                    let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
                     item.image = self.item.image
                     item.expiryDays = self.item.expiryDays
-                    item.state = FoodState.fresh
-                    item.quantity = self.quantity
-                    item.expiryDate = self.expiryDate
-                    item.isBarcodeItem = true
                     item.upc = self.item.upc
                     
                     let userDocument = db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").document()
                     
                     userDocument.setData([
                         "itemId" : item.id,
-                        "quantity": item.quantity!,
-                        "expiryDate": item.expiryDate!,
-                        "state": item.state!.rawValue,
+                        "quantity": self.quantity,
+                        "expiryDate": self.expiryDate,
+                        "state": FoodState.fresh.rawValue,
                         "creationDate": Date()
                     ]) { error in
                         guard error == nil else {
@@ -80,15 +75,14 @@ import FirebaseStorage
                             return
                         }
                         
-                        let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, category: item.category, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
+                        let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
                         userItem.itemId = item.id
                         userItem.creationDate = Date()
                         userItem.image = item.image
                         userItem.expiryDays = item.expiryDays
                         userItem.state = FoodState.fresh
-                        userItem.quantity = item.quantity
-                        userItem.expiryDate = item.expiryDate
-                        userItem.isBarcodeItem = true
+                        userItem.quantity = self.quantity
+                        userItem.expiryDate = self.expiryDate
                         userItem.upc = item.upc
                         
                         let items : [Item] = [item, userItem]
@@ -100,7 +94,6 @@ import FirebaseStorage
                 document.setData([
                     "name": item.name,
                     "brand": item.brand,
-                    "category": item.category.rawValue,
                     "expiryDays": item.expiryDays!,
                     "imageReference": item.imageReference,
                     "isBarcodeItem": item.isBarcodeItem
@@ -110,7 +103,7 @@ import FirebaseStorage
                         return
                     }
                     
-                    let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, category: self.item.category, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
+                    let item : Item = Item(id: document.documentID, name: self.item.name, brand: self.item.brand, imageReference: self.item.imageReference, isBarcodeItem: self.item.isBarcodeItem)
                     item.image = self.item.image
                     item.expiryDays = self.item.expiryDays
                     item.state = FoodState.fresh
@@ -121,9 +114,9 @@ import FirebaseStorage
                     
                     userDocument.setData([
                         "itemId" : item.id,
-                        "quantity": item.quantity!,
-                        "expiryDate": item.expiryDate!,
-                        "state": item.state!.rawValue,
+                        "quantity": self.quantity,
+                        "expiryDate": self.expiryDate,
+                        "state": FoodState.fresh.rawValue,
                         "creationDate": Date()
                     ]) { error in
                         guard error == nil else {
@@ -131,14 +124,14 @@ import FirebaseStorage
                             return
                         }
                         
-                        let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, category: item.category, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
+                        let userItem : Item = Item(id: userDocument.documentID, name: item.name, brand: item.brand, imageReference: item.imageReference, isBarcodeItem: item.isBarcodeItem)
                         userItem.itemId = item.id
                         userItem.creationDate = Date()
                         userItem.image = item.image
                         userItem.expiryDays = item.expiryDays
                         userItem.state = FoodState.fresh
-                        userItem.quantity = item.quantity
-                        userItem.expiryDate = item.expiryDate
+                        userItem.quantity = self.quantity
+                        userItem.expiryDate = self.expiryDate
                         
                         let items : [Item] = [item, userItem]
                         
