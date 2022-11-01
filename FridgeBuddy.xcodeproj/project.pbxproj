@@ -51,6 +51,8 @@
 		8610AAAF28FE60E900D6EED9 /* BarCodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */; };
 		86CBBBE028E0FEF9004494E1 /* CameraBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */; };
 		86CBBBE228E10ACF004494E1 /* CameraBarcodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */; };
+		86F049B62910EAB400DA2E75 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F049B52910EAB400DA2E75 /* RecipeCard.swift */; };
+		86F049B82910EC6800DA2E75 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F049B72910EC6800DA2E75 /* Recipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeItem.swift; sourceTree = "<group>"; };
 		86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeView.swift; sourceTree = "<group>"; };
 		86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeService.swift; sourceTree = "<group>"; };
+		86F049B52910EAB400DA2E75 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
+		86F049B72910EC6800DA2E75 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 				07202F26289F0D4500C68AC3 /* Item.swift */,
 				07F11F2C28DCA4CC00E8E2FD /* FoodState.swift */,
 				8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */,
+				86F049B72910EC6800DA2E75 /* Recipe.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				07F1D7B2288B9C0700178430 /* TextFieldView.swift */,
 				07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */,
 				07F1D7B6288BA37C00178430 /* IconView.swift */,
+				86F049B52910EAB400DA2E75 /* RecipeCard.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				079BCBD22908B93500B36209 /* BarcodeView.swift in Sources */,
 				07F1D7B7288BA37C00178430 /* IconView.swift in Sources */,
 				072B887B2888D7940016BC95 /* FridgeBuddyApp.swift in Sources */,
+				86F049B62910EAB400DA2E75 /* RecipeCard.swift in Sources */,
 				078760662898D1AD00285CC1 /* CaptureItemPhotoView.swift in Sources */,
 				078FF9CC288AEF3500BD5E7D /* LoginViewModel.swift in Sources */,
 				0789A69428E544AF006B0502 /* AddInventoryViewModel.swift in Sources */,
@@ -384,6 +391,7 @@
 				86CBBBE028E0FEF9004494E1 /* CameraBarcodeView.swift in Sources */,
 				0787605B28982B8C00285CC1 /* AppDelegate.swift in Sources */,
 				86CBBBE228E10ACF004494E1 /* CameraBarcodeService.swift in Sources */,
+				86F049B82910EC6800DA2E75 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FridgeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = 8MJU534P5N;
+				DEVELOPMENT_TEAM = N7WB37K3MQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
@@ -528,7 +536,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBddy;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -544,7 +552,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FridgeBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = 8MJU534P5N;
+				DEVELOPMENT_TEAM = N7WB37K3MQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FridgeBuddy/Info.plist;
@@ -560,7 +568,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBddy;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.FantasticDevelopers.FridgeBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

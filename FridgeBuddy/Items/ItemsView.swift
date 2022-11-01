@@ -87,8 +87,9 @@ struct ItemCard : View {
             Text("Expiry: \(itemsViewModel.formatDate(date: item.expiryDate!))")
         }
         .padding()
-        .background(.red.opacity(0.3))
-        .cornerRadius(10)
+        .background(LinearGradient(gradient: Gradient(colors: [Color(.green).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style:.continuous))
+        .shadow(color:Color.black.opacity(0.3), radius: 15, x:0, y:10)
         .onTapGesture {
             itemsViewModel.item = item
             itemsViewModel.showDetails.toggle()

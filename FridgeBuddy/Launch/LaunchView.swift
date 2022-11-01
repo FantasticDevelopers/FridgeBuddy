@@ -11,6 +11,7 @@ struct LaunchView: View {
     @EnvironmentObject var launchViewModel : LaunchViewModel
     @EnvironmentObject var addViewModel : AddViewModel
     @EnvironmentObject var itemsViewModel : ItemsViewModel
+    @EnvironmentObject var recipesViewModel : RecipesViewModel
     
     var body: some View {
         if launchViewModel.isLogin {
@@ -42,7 +43,33 @@ struct LaunchView: View {
                     addViewModel.loadItems { result in
                         switch result {
                         case .success(let items):
-                            itemsViewModel.setUserItems(items: items)
+                            itemsViewModel.setUserItems(items: items){ r in
+                                switch r {
+                                case .success(let userItems):
+                                    do{
+                                        recipesViewModel.ingredients = []
+                                        itemsViewModel.selectedState = .fresh
+                                        recipesViewModel.setIngredients(items: itemsViewModel.filteredItems)
+                                        itemsViewModel.selectedState = .stale
+                                        recipesViewModel.setIngredients(items: itemsViewModel.filteredItems)
+                                        itemsViewModel.selectedState = .fresh
+                                    }
+                                    
+                                    recipesViewModel.getRecipes { result in
+                                        switch result {
+                                        case .success(let recipes):
+                                            DispatchQueue.main.async {
+                                                recipesViewModel.recipes = recipes
+                                            }
+                                        case .failure(let error):
+                                            launchViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Ok")
+                                        }
+                                    }
+                                    
+                                case .failure( let error):
+                                    launchViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
+                                }
+                            }
                         case .failure(let error):
                             launchViewModel.alertItem.show(title: "Please try again!", message: error.localizedDescription, buttonTitle: "Got it!")
                         }

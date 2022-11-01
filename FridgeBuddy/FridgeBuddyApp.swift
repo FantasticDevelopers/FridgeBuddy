@@ -18,6 +18,7 @@ struct FridgeBuddyApp: App {
                 .environmentObject(LaunchViewModel())
                 .environmentObject(AddViewModel())
                 .environmentObject(ItemsViewModel())
+                .environmentObject(RecipesViewModel())
         }
     }
 }

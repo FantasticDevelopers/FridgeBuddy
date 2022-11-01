@@ -31,12 +31,12 @@ import FirebaseAuth
     
     var item : Item = Item()
     
-    func setUserItems(items : [Item]) {
+    func setUserItems(items: [Item] , completion: @escaping (Result<[Item], Error>) -> Void) {
         let db = Firestore.firestore()
         
         db.collection("users").document(Auth.auth().currentUser!.uid).collection("items").getDocuments { snapshot, error in
             guard error == nil else {
-                self.alertItem.show(title: "Please try again!", message: error!.localizedDescription, buttonTitle: "Got it!")
+                completion(.failure(error!))
                 return
             }
             
@@ -57,6 +57,7 @@ import FirebaseAuth
                         return item
                     }
                     setItemsState()
+                    completion(.success(self.items))
                 }
             }
         }
