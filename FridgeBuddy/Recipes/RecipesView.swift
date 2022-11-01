@@ -42,7 +42,11 @@ struct RecipesList: View{
             }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 15)], spacing: 15){
                 ForEach(recipes) {recipe in
-                    RecipeCard(recipe: recipe)
+                    NavigationLink {
+                        RecipeWebView(url: URL(string: "https://www.youtube.com/results?search_query=" + recipe.title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!)
+                    } label: {
+                        RecipeCard(recipe: recipe)
+                    }
                 }
             }.padding(.top)
         }

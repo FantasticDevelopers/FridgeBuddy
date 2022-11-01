@@ -49,6 +49,7 @@
 		07F1D7B5288B9FFA00178430 /* SecureTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */; };
 		07F1D7B7288BA37C00178430 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1D7B6288BA37C00178430 /* IconView.swift */; };
 		8610AAAF28FE60E900D6EED9 /* BarCodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */; };
+		86C466802911601E00C13072 /* RecipeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C4667F2911601E00C13072 /* RecipeWebView.swift */; };
 		86CBBBE028E0FEF9004494E1 /* CameraBarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */; };
 		86CBBBE228E10ACF004494E1 /* CameraBarcodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */; };
 		86F049B62910EAB400DA2E75 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F049B52910EAB400DA2E75 /* RecipeCard.swift */; };
@@ -96,6 +97,7 @@
 		07F1D7B4288B9FFA00178430 /* SecureTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextFieldView.swift; sourceTree = "<group>"; };
 		07F1D7B6288BA37C00178430 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		8610AAAE28FE60E900D6EED9 /* BarCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeItem.swift; sourceTree = "<group>"; };
+		86C4667F2911601E00C13072 /* RecipeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeWebView.swift; sourceTree = "<group>"; };
 		86CBBBDF28E0FEF9004494E1 /* CameraBarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeView.swift; sourceTree = "<group>"; };
 		86CBBBE128E10ACF004494E1 /* CameraBarcodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBarcodeService.swift; sourceTree = "<group>"; };
 		86F049B52910EAB400DA2E75 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				072B88A32888FA590016BC95 /* RecipesView.swift */,
 				072B88A52888FA6F0016BC95 /* RecipesViewModel.swift */,
+				86C4667F2911601E00C13072 /* RecipeWebView.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				072B88A02888FA1C0016BC95 /* AddView.swift in Sources */,
 				07F11F2D28DCA4CD00E8E2FD /* FoodState.swift in Sources */,
 				078760682898DBD200285CC1 /* AddFormView.swift in Sources */,
+				86C466802911601E00C13072 /* RecipeWebView.swift in Sources */,
 				079BCBD42908B94500B36209 /* BarcodeViewModel.swift in Sources */,
 				078760642898A11400285CC1 /* CameraService.swift in Sources */,
 				078FF9CA288AEF2300BD5E7D /* LoginView.swift in Sources */,

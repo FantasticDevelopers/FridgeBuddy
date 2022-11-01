@@ -8,36 +8,51 @@
 import SwiftUI
 import WebKit
 
+struct TipsUrl: Identifiable, Hashable{
+    var id = UUID()
+    var name : String = ""
+    var url : String = ""
+}
+
 struct MoreView: View {
     @StateObject var moreViewModel = MoreViewModel()
     @EnvironmentObject var launchViewModel : LaunchViewModel
     @State private var showWebView : Bool = false
+
+    @State private var tipurl = TipsUrl(name: "Banana", url :"https://stilltasty.com/fooditems/index/16451")
+    private var TipsURLS = [TipsUrl(name: "Banana", url :"https://stilltasty.com/fooditems/index/16451"),
+                            TipsUrl(name: "Apple", url :"https://stilltasty.com/fooditems/index/16383"),
+                            TipsUrl(name: "Eggs", url :"https://stilltasty.com/fooditems/index/17144"),
+                            TipsUrl(name: "Milk", url :"https://stilltasty.com/fooditems/index/17687"),
+                            TipsUrl(name: "Bell Pepper", url :"https://stilltasty.com/fooditems/index/16523")]
     
     var body: some View {
         NavigationView{
             VStack {
-                Text(moreViewModel.name)
+                Text("Hello, \(moreViewModel.name)!")
                     .padding(.vertical, 10.0)
                     .padding(.horizontal)
                     .background(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.green, lineWidth: 2))
                     .padding(.top)
                 
-                Button {
-                    showWebView.toggle()
-                } label: {
-                    Text("Show Tips")
-                }
-                .sheet(isPresented: $showWebView) {
-                    if #available(iOS 16.0, *){
-                        WebView(url: URL(string: "https://stilltasty.com/fooditems/index/16451")!)
-                            .presentationDetents([.fraction(0.85)])
+                List(TipsURLS) { t in
+                    Button {
+                        tipurl = t
+                        showWebView.toggle()
+                    } label: {
+                        Text("See Tips for \(t.name)")
                     }
-                    else{
-                        WebView(url: URL(string: "https://stilltasty.com/fooditems/index/16451")!)
+                    .sheet(isPresented: $showWebView) {
+                        if #available(iOS 16.0, *){
+                            WebView(url: URL(string: tipurl.url)!)
+                                .presentationDetents([.fraction(0.85)])
+                        }
+                        else{
+                            WebView(url: URL(string: tipurl.url)!)
+                        }
                     }
-                    
-                }
+                }.navigationTitle("Tips and Tricks")
                 
                 Button {
                     moreViewModel.signOut()
